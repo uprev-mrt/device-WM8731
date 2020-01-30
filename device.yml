@@ -1,0 +1,80 @@
+---
+name: wm8731
+category: Device
+description: Aduio codec
+datasheet: https://d3uzseaevmutz1.cloudfront.net/pubs/proDatasheet/WM8731_v
+mfg: STMicroelectronics
+mfg_pn: WM8731CLSEFL
+digikey_pn: WM8731CSEFL-ND
+
+prefix: wm
+bus: I2C
+i2c_addr: 0x00
+
+###########################################################################################################
+#                                   REGISTERS                                                             #
+###########################################################################################################
+
+registers:
+  - LEFT_IN:        { addr: 0x00 , type: uint16_t, default: 0x097, desc: Left line in control}                
+  - RGHT_IN:        { addr: 0x01 , type: uint16_t, default: 0x097, desc: Right line in control}
+  - LEFT_OUT:       { addr: 0x02 , type: uint16_t, default: 0x079, desc: Left Headphone Out control}
+  - RGHT_OUT:       { addr: 0x03 , type: uint16_t, default: 0x079, desc: Right Headphone Out control}
+  - AN_AUDIO_PATH:  { addr: 0x04 , type: uint16_t, default: 0x00A, desc: Analogue audio path control}
+  - DIG_AUDIO_PATH: { addr: 0x05 , type: uint16_t, default: 0x008, desc: Digital audio path control}
+  - POWER_DWN:      { addr: 0x06 , type: uint16_t, default: 0x09F, desc: Power Down control}
+  - DIG_IFACE:      { addr: 0x07 , type: uint16_t, default: 0x09F, desc: Digital audio interface format}
+  - SAMPLE:         { addr: 0x08 , type: uint16_t, default: 0x000, desc: Sampling control}
+  - ACTIVE:         { addr: 0x09 , type: uint16_t, default: 0x000, desc: Active Control}
+  - RESET:          { addr: 0x0F , type: uint16_t, default: 0xFFFF, desc: Reset control}
+
+
+###########################################################################################################
+#                                   VALUES                                                                #
+###########################################################################################################
+fields:
+  - LEFT_IN:
+    - MUTE: {mask: 0x080, desc: Mutes Left input}
+    - LRINBOTH: {mask: 0x100, desc: Left to Right Channel Line Input Volume and Mute Data Load Control}
+    - VOLUME: 
+        mask: 0x01F
+        desc: Volume control in 1.5dB steps range -34.5dB -> +12dB
+        values:
+          - MIN: { val: 0, desc: -34.5dB}
+          - MAX: {val: 32, desc: +12dB}
+          - STEP: { val: 1, desc: 1.5dB Step}
+
+
+  - RGHT_IN: 
+    - MUTE: {mask: 0x080, desc: Mutes Left input}
+    - LRINBOTH: {mask: 0x100, desc: Left to Right Channel Line Input Volume and Mute Data Load Control}
+    - VOLUME: 
+        mask: 0x01F
+        desc: Volume control in 1.5dB steps range -34.5dB -> +12dB
+        values:
+          - MIN: { val: 0, desc: -34.5dB}
+          - MAX: {val: 32, desc: +12dB}
+          - STEP: { val: 1, desc: 1.5dB Step}
+
+  - DIG_IFACE:
+    - BLCKINV: {mask: 0x80, desc: Inverts the bit clock}
+    - MASTER_MODE: {mask: 0x40, desc: Enables Master mode}
+    - LRSWAP: {mask: 0x20, desc: Swaps LR clock polarity}
+    - LRP:
+        mask: 0x010
+        desc: DACLRC phase control (in left, right or I2S modes) 
+        values:
+          - HIGH: {val: 1, Right Channel DAC DACLRC high}
+          - LOW: {val: 1, Right Channel DAC DACLRC low}
+    - IWL:
+        mask: 0x00C
+        desc: Audio data size in bits 
+        values:
+          - 32BIT: {val: 0b11 , desc: 32 bit sample size }
+          - 24BIT: {val: 0b10 , desc: 24 bit sample size }
+          - 20BIT: {val: 0b01 , desc: 20 bit sample size }
+          - 16BIT: {val: 0b00 , desc: 16 bit sample size }
+
+
+
+
