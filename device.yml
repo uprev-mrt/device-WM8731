@@ -2,7 +2,7 @@
 name: wm8731
 category: Device
 description: Aduio codec
-datasheet: https://d3uzseaevmutz1.cloudfront.net/pubs/proDatasheet/WM8731_v
+datasheet: https://statics.cirrus.com/pubs/proDatasheet/WM8731_v4.9.pdf
 mfg: STMicroelectronics
 mfg_pn: WM8731CLSEFL
 digikey_pn: WM8731CSEFL-ND
@@ -17,11 +17,11 @@ i2c_addr: 0x00
 
 registers:
   - LEFT_IN:        { addr: 0x00 , type: uint16_t, default: 0x097, desc: Left line in control}                
-  - RGHT_IN:        { addr: 0x01 , type: uint16_t, default: 0x097, desc: Right line in control}
+  - RIGHT_IN:       { addr: 0x01 , type: uint16_t, default: 0x097, desc: Right line in control}
   - LEFT_OUT:       { addr: 0x02 , type: uint16_t, default: 0x079, desc: Left Headphone Out control}
-  - RGHT_OUT:       { addr: 0x03 , type: uint16_t, default: 0x079, desc: Right Headphone Out control}
-  - AN_AUDIO_PATH:  { addr: 0x04 , type: uint16_t, default: 0x00A, desc: Analogue audio path control}
-  - DIG_AUDIO_PATH: { addr: 0x05 , type: uint16_t, default: 0x008, desc: Digital audio path control}
+  - RIGHT_OUT:      { addr: 0x03 , type: uint16_t, default: 0x079, desc: Right Headphone Out control}
+  - AN_PATH:        { addr: 0x04 , type: uint16_t, default: 0x00A, desc: Analogue audio path control}
+  - DIG_PATH:       { addr: 0x05 , type: uint16_t, default: 0x008, desc: Digital audio path control}
   - POWER_DWN:      { addr: 0x06 , type: uint16_t, default: 0x09F, desc: Power Down control}
   - DIG_IFACE:      { addr: 0x07 , type: uint16_t, default: 0x09F, desc: Digital audio interface format}
   - SAMPLE:         { addr: 0x08 , type: uint16_t, default: 0x000, desc: Sampling control}
@@ -41,11 +41,12 @@ fields:
         desc: Volume control in 1.5dB steps range -34.5dB -> +12dB
         values:
           - MIN: { val: 0, desc: -34.5dB}
+          - 0dB: {val: 22, desc: 0db Gain}
           - MAX: {val: 32, desc: +12dB}
           - STEP: { val: 1, desc: 1.5dB Step}
 
 
-  - RGHT_IN: 
+  - RIGHT_IN: 
     - MUTE: {mask: 0x080, desc: Mutes Left input}
     - LRINBOTH: {mask: 0x100, desc: Left to Right Channel Line Input Volume and Mute Data Load Control}
     - VOLUME: 
@@ -53,27 +54,101 @@ fields:
         desc: Volume control in 1.5dB steps range -34.5dB -> +12dB
         values:
           - MIN: { val: 0, desc: -34.5dB}
+          - 0dB: {val: 22, desc: 0db Gain}
           - MAX: {val: 32, desc: +12dB}
           - STEP: { val: 1, desc: 1.5dB Step}
+  
+  - AN_PATH:
+    - MICBOOST: { bit: 0, desc: Microphone Input Level Boost }
+    - MUTEMIC:  { bit: 1, desc: Mute Mic input to ADC }     
+    - INSEL:
+        bit: 2
+        desc: Selects input between Mic and Line-in 
+        values:
+          - MIC: {val: 1, desc: Selects Microphone}
+          - LINE: {val: 0, desc: Selects Line-in}
+    - BYPASS:   { bit: 3, desc: Combines Line-in signal to Output}
+    - DACSEL:   { bit: 4, desc: DAC Select }
+    - SIDETONE: { bit: 5, desc: Combines Mic signal to Output}
+    - SIDEATT: 
+        mask: 0xC0
+        desc: Side Tone attenuation
+        values:
+          - 6dB:  {val: 0b00, desc: 6dB of attenuation}
+          - 9dB:  {val: 0b01, desc: 9dB of attenuation}
+          - 12dB: {val: 0b10, desc: 12dB of attenuation}
+          - 15dB: {val: 0b11, desc: 15dB of attenuation}
+
+  - DIG_PATH:
+    - ADCHPD: { bit: 0, desc: ADC High Pass Filter }
+    - DEEMP:
+        mask: 0x06
+        desc: De-emphasis Control 
+        values:
+          - DIS:      {val: 0b00, desc: Disable}
+          - 32kHz:    {val: 0b01, desc: 32 kHz }
+          - 44_1kHz:  {val: 0b10, desc: 44.1 kHz }
+          - 48kHz:    {val: 0b11, desc: 48 kHz }
+    - DACMU:  { bit: 3, desc: DAC Soft Mute }
+    - HPOR:   { bit: 4, desc: Store dc offset when High Pass Filter disabled }
+  
+  - POWER_DWN:
+    - LINEINPD: { bit: 0, desc: Line Input Power Down  }
+    - MICPD:    { bit: 1, desc: Microphone Input an Bias PowerDown  }
+    - ADCPD:    { bit: 2, desc: ADC Power Dow }
+    - DACPD:    { bit: 3, desc: DAC Power Down  }
+    - OUTPD:    { bit: 4, desc: Outputs Power Down  }
+    - OSCPD:    { bit: 5, desc: Oscillator Power Down  }
+    - CLKOUTPD: { bit: 6, desc: CLKOUT power down }
+    - POWEROFF: { bit: 7, desc: POWEROFF mode }
 
   - DIG_IFACE:
-    - BLCKINV: {mask: 0x80, desc: Inverts the bit clock}
-    - MASTER_MODE: {mask: 0x40, desc: Enables Master mode}
-    - LRSWAP: {mask: 0x20, desc: Swaps LR clock polarity}
+    - BLCKINV:     {bit: 7, desc: Inverts the bit clock}
+    - MASTER_MODE: {bit: 6, desc: Enables Master mode}
+    - LRSWAP:      {bit: 5, desc: Swaps LR clock polarity}
     - LRP:
-        mask: 0x010
+        bit: 4
         desc: DACLRC phase control (in left, right or I2S modes) 
         values:
           - HIGH: {val: 1, Right Channel DAC DACLRC high}
           - LOW: {val: 1, Right Channel DAC DACLRC low}
     - IWL:
         mask: 0x00C
-        desc: Audio data size in bits 
+        desc: Word Length. Audio data size
         values:
           - 32BIT: {val: 0b11 , desc: 32 bit sample size }
           - 24BIT: {val: 0b10 , desc: 24 bit sample size }
           - 20BIT: {val: 0b01 , desc: 20 bit sample size }
           - 16BIT: {val: 0b00 , desc: 16 bit sample size }
+    - FORMAT:
+        mask: 0x03
+        desc: Selects digital audio format 
+        values:
+          - RIGHT_JUST: {val: 0b00, desc: MSB-First right justified}
+          - LEFT_JUST:  {val: 0b01, desc: MSB-first left justified}
+          - I2S:        {val: 0b10, desc: I2S format. MSB-First left -1 justified}
+          - DSP:        {val: 0b11, desc: DSP Mode. frame sync + 2 data packed words }
+    
+  - RESET:
+    - RESET: {mask: 0xFF, desc: Setting to 0 resets the device}
+
+  - ACTIVE:
+    - Enable: {bit: 0, desc: Enables Digital Audio interface}
+
+configs:
+  - 16bit_line_in:
+      desc: Device configured for stereo input with 16bit data 
+      registers:
+        - RESET:      {RESET: 0, delay: 100}
+        - LEFT_IN:    {MUTE: OFF, LRINBOTH: OFF, VOLUME: 0dB }
+        - RIGHT_IN:   {MUTE: OFF, LRINBOTH: OFF, VOLUME: 0dB }
+        - DIG_PATH:   {ADCHPD: ON}
+        - POWER_DWN:  {MICPD: ON, DACPD: ON, OUTPD: ON }
+        - DIG_IFACE:  {IWL: 16BIT, FORMAT: I2S}
+        - ACTIVE:     {Enable: ON}
+        
+
+
 
 
 
