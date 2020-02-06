@@ -26,18 +26,18 @@ extern "C"
 *******************************************************************************/
 
 typedef struct{
-    mrt_regdev_t mRegDev;         //ptr to base register-device 
-    mrt_reg_t mLeftIn;            //Left line in control
-    mrt_reg_t mRightIn;           //Right line in control
-    mrt_reg_t mLeftOut;           //Left Headphone Out control
-    mrt_reg_t mRightOut;          //Right Headphone Out control
-    mrt_reg_t mAnPath;            //Analogue audio path control
-    mrt_reg_t mDigPath;           //Digital audio path control
-    mrt_reg_t mPowerDwn;          //Power Down control
-    mrt_reg_t mDigIface;          //Digital audio interface format
-    mrt_reg_t mSample;            //Sampling control
-    mrt_reg_t mActive;            //Active Control
-    mrt_reg_t mReset;             //Reset control
+    mrt_regdev_t mRegDev; //ptr to base register-device 
+    mrt_reg_t mLeftIn;  //Left line in control
+    mrt_reg_t mRightIn;  //Right line in control
+    mrt_reg_t mLeftOut;  //Left Headphone Out control
+    mrt_reg_t mRightOut;  //Right Headphone Out control
+    mrt_reg_t mAnPath;  //Analogue audio path control
+    mrt_reg_t mDigPath;  //Digital audio path control
+    mrt_reg_t mPowerDwn;  //Power Down control
+    mrt_reg_t mDigIface;  //Digital audio interface format
+    mrt_reg_t mSample;  //Sampling control
+    mrt_reg_t mActive;  //Active Control
+    mrt_reg_t mReset;  //Reset control
 /*user-block-struct-start*/
 /*user-block-struct-end*/
 }wm8731_t;

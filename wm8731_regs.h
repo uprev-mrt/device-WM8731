@@ -36,7 +36,7 @@
     #define WM_LEFT_IN_MUTE                                        0x0080 /* Mutes Left input */
     #define WM_LEFT_IN_LRINBOTH                                    0x0100 /* Left to Right Channel Line Input Volume and Mute Data Load Control */
     /* LEFT_IN -> VOLUME */
-    #define WM_LEFT_IN_VOLUME_FIELD_MASK                           0x001F /* Volume control in 1.5dB steps range -34.5dB -> +12dB */
+    #define WM_LEFT_IN_VOLUME_FIELD_MASK                           0x001F /* Volume control for Left input in 1.5dB steps range -34.5dB -> +12dB */
     #define WM_LEFT_IN_VOLUME_FIELD_OFFSET                         0x0000
       #define WM_LEFT_IN_VOLUME_MIN                                0x0000 /* -34.5dB */
       #define WM_LEFT_IN_VOLUME_0DB                                0x0016 /* 0db Gain */
@@ -45,24 +45,37 @@
 
 /* RIGHT_IN Register Fields */
     /* RIGHT_IN -> Flags */
-    #define WM_RIGHT_IN_MUTE                                       0x0080 /* Mutes Left input */
+    #define WM_RIGHT_IN_MUTE                                       0x0080 /* Mutes Right input */
     #define WM_RIGHT_IN_LRINBOTH                                   0x0100 /* Left to Right Channel Line Input Volume and Mute Data Load Control */
     /* RIGHT_IN -> VOLUME */
-    #define WM_RIGHT_IN_VOLUME_FIELD_MASK                          0x001F /* Volume control in 1.5dB steps range -34.5dB -> +12dB */
+    #define WM_RIGHT_IN_VOLUME_FIELD_MASK                          0x001F /* Volume control for right input in 1.5dB steps range -34.5dB -> +12dB */
     #define WM_RIGHT_IN_VOLUME_FIELD_OFFSET                        0x0000
-      #define WM_RIGHT_IN_VOLUME_MIN                               0x0000 /* -34.5dB */
+      #define WM_RIGHT_IN_VOLUME_MIN                               0x0000 /* minimum -34.5dB */
       #define WM_RIGHT_IN_VOLUME_0DB                               0x0016 /* 0db Gain */
-      #define WM_RIGHT_IN_VOLUME_MAX                               0x0020 /* +12dB */
+      #define WM_RIGHT_IN_VOLUME_MAX                               0x0020 /* maximum +12dB */
       #define WM_RIGHT_IN_VOLUME_STEP                              0x0001 /* 1.5dB Step */
 
 /* AN_PATH Register Fields */
-    /* AN_PATH -> Flags */
-    #define WM_AN_PATH_MICBOOST                                    0x0001 /* Microphone Input Level Boost */
-    #define WM_AN_PATH_MUTEMIC                                     0x0002 /* Mute Mic input to ADC */
-    #define WM_AN_PATH_INSEL                                       0x0004 /* Selects input between Mic and Line-in */
-    #define WM_AN_PATH_BYPASS                                      0x0008 /* Combines Line-in signal to Output */
-    #define WM_AN_PATH_DACSEL                                      0x0010 /* DAC Select */
-    #define WM_AN_PATH_SIDETONE                                    0x0020 /* Combines Mic signal to Output */
+    /* AN_PATH -> MICBOOST */
+    #define WM_AN_PATH_MICBOOST_FIELD_MASK                         0xFFFFFFFF /* Microphone Input Level Boost */
+    #define WM_AN_PATH_MICBOOST_FIELD_OFFSET                       0x0000
+    /* AN_PATH -> MUTEMIC */
+    #define WM_AN_PATH_MUTEMIC_FIELD_MASK                          0xFFFFFFFF /* Mute Mic input to ADC */
+    #define WM_AN_PATH_MUTEMIC_FIELD_OFFSET                        0x0000
+    /* AN_PATH -> INSEL */
+    #define WM_AN_PATH_INSEL_FIELD_MASK                            0xFFFFFFFF /* Selects input between Mic and Line-in */
+    #define WM_AN_PATH_INSEL_FIELD_OFFSET                          0x0000
+      #define WM_AN_PATH_INSEL_MIC                                 0x0001 /* Selects Microphone */
+      #define WM_AN_PATH_INSEL_LINE                                0x0000 /* Selects Line-in */
+    /* AN_PATH -> BYPASS */
+    #define WM_AN_PATH_BYPASS_FIELD_MASK                           0xFFFFFFFF /* Combines Line-in signal to Output */
+    #define WM_AN_PATH_BYPASS_FIELD_OFFSET                         0x0000
+    /* AN_PATH -> DACSEL */
+    #define WM_AN_PATH_DACSEL_FIELD_MASK                           0xFFFFFFFF /* DAC Select */
+    #define WM_AN_PATH_DACSEL_FIELD_OFFSET                         0x0000
+    /* AN_PATH -> SIDETONE */
+    #define WM_AN_PATH_SIDETONE_FIELD_MASK                         0xFFFFFFFF /* Combines Mic signal to Output */
+    #define WM_AN_PATH_SIDETONE_FIELD_OFFSET                       0x0000
     /* AN_PATH -> SIDEATT */
     #define WM_AN_PATH_SIDEATT_FIELD_MASK                          0x00C0 /* Side Tone attenuation */
     #define WM_AN_PATH_SIDEATT_FIELD_OFFSET                        0x0006
@@ -72,10 +85,9 @@
       #define WM_AN_PATH_SIDEATT_15DB                              0x0003 /* 15dB of attenuation */
 
 /* DIG_PATH Register Fields */
-    /* DIG_PATH -> Flags */
-    #define WM_DIG_PATH_ADCHPD                                     0x0001 /* ADC High Pass Filter */
-    #define WM_DIG_PATH_DACMU                                      0x0008 /* DAC Soft Mute */
-    #define WM_DIG_PATH_HPOR                                       0x0010 /* Store dc offset when High Pass Filter disabled */
+    /* DIG_PATH -> ADCHPD */
+    #define WM_DIG_PATH_ADCHPD_FIELD_MASK                          0xFFFFFFFF /* ADC High Pass Filter */
+    #define WM_DIG_PATH_ADCHPD_FIELD_OFFSET                        0x0000
     /* DIG_PATH -> DEEMP */
     #define WM_DIG_PATH_DEEMP_FIELD_MASK                           0x0006 /* De-emphasis Control */
     #define WM_DIG_PATH_DEEMP_FIELD_OFFSET                         0x0001
@@ -83,24 +95,54 @@
       #define WM_DIG_PATH_DEEMP_32KHZ                              0x0001 /* 32 kHz */
       #define WM_DIG_PATH_DEEMP_44_1KHZ                            0x0002 /* 44.1 kHz */
       #define WM_DIG_PATH_DEEMP_48KHZ                              0x0003 /* 48 kHz */
+    /* DIG_PATH -> DACMU */
+    #define WM_DIG_PATH_DACMU_FIELD_MASK                           0xFFFFFFFF /* DAC Soft Mute */
+    #define WM_DIG_PATH_DACMU_FIELD_OFFSET                         0x0000
+    /* DIG_PATH -> HPOR */
+    #define WM_DIG_PATH_HPOR_FIELD_MASK                            0xFFFFFFFF /* Store dc offset when High Pass Filter disabled */
+    #define WM_DIG_PATH_HPOR_FIELD_OFFSET                          0x0000
 
 /* POWER_DWN Register Fields */
-    /* POWER_DWN -> Flags */
-    #define WM_POWER_DWN_LINEINPD                                  0x0001 /* Line Input Power Down */
-    #define WM_POWER_DWN_MICPD                                     0x0002 /* Microphone Input an Bias PowerDown */
-    #define WM_POWER_DWN_ADCPD                                     0x0004 /* ADC Power Dow */
-    #define WM_POWER_DWN_DACPD                                     0x0008 /* DAC Power Down */
-    #define WM_POWER_DWN_OUTPD                                     0x0010 /* Outputs Power Down */
-    #define WM_POWER_DWN_OSCPD                                     0x0020 /* Oscillator Power Down */
-    #define WM_POWER_DWN_CLKOUTPD                                  0x0040 /* CLKOUT power down */
-    #define WM_POWER_DWN_POWEROFF                                  0x0080 /* POWEROFF mode */
+    /* POWER_DWN -> LINEINPD */
+    #define WM_POWER_DWN_LINEINPD_FIELD_MASK                       0xFFFFFFFF /* Line Input Power Down */
+    #define WM_POWER_DWN_LINEINPD_FIELD_OFFSET                     0x0000
+    /* POWER_DWN -> MICPD */
+    #define WM_POWER_DWN_MICPD_FIELD_MASK                          0xFFFFFFFF /* Microphone Input an Bias PowerDown */
+    #define WM_POWER_DWN_MICPD_FIELD_OFFSET                        0x0000
+    /* POWER_DWN -> ADCPD */
+    #define WM_POWER_DWN_ADCPD_FIELD_MASK                          0xFFFFFFFF /* ADC Power Dow */
+    #define WM_POWER_DWN_ADCPD_FIELD_OFFSET                        0x0000
+    /* POWER_DWN -> DACPD */
+    #define WM_POWER_DWN_DACPD_FIELD_MASK                          0xFFFFFFFF /* DAC Power Down */
+    #define WM_POWER_DWN_DACPD_FIELD_OFFSET                        0x0000
+    /* POWER_DWN -> OUTPD */
+    #define WM_POWER_DWN_OUTPD_FIELD_MASK                          0xFFFFFFFF /* Outputs Power Down */
+    #define WM_POWER_DWN_OUTPD_FIELD_OFFSET                        0x0000
+    /* POWER_DWN -> OSCPD */
+    #define WM_POWER_DWN_OSCPD_FIELD_MASK                          0xFFFFFFFF /* Oscillator Power Down */
+    #define WM_POWER_DWN_OSCPD_FIELD_OFFSET                        0x0000
+    /* POWER_DWN -> CLKOUTPD */
+    #define WM_POWER_DWN_CLKOUTPD_FIELD_MASK                       0xFFFFFFFF /* CLKOUT power down */
+    #define WM_POWER_DWN_CLKOUTPD_FIELD_OFFSET                     0x0000
+    /* POWER_DWN -> POWEROFF */
+    #define WM_POWER_DWN_POWEROFF_FIELD_MASK                       0xFFFFFFFF /* POWEROFF mode */
+    #define WM_POWER_DWN_POWEROFF_FIELD_OFFSET                     0x0000
 
 /* DIG_IFACE Register Fields */
-    /* DIG_IFACE -> Flags */
-    #define WM_DIG_IFACE_BLCKINV                                   0x0080 /* Inverts the bit clock */
-    #define WM_DIG_IFACE_MASTER_MODE                               0x0040 /* Enables Master mode */
-    #define WM_DIG_IFACE_LRSWAP                                    0x0020 /* Swaps LR clock polarity */
-    #define WM_DIG_IFACE_LRP                                       0x0010 /* DACLRC phase control (in left, right or I2S modes) */
+    /* DIG_IFACE -> BLCKINV */
+    #define WM_DIG_IFACE_BLCKINV_FIELD_MASK                        0xFFFFFFFF /* Inverts the bit clock */
+    #define WM_DIG_IFACE_BLCKINV_FIELD_OFFSET                      0x0000
+    /* DIG_IFACE -> MASTER_MODE */
+    #define WM_DIG_IFACE_MASTER_MODE_FIELD_MASK                    0xFFFFFFFF /* Enables Master mode */
+    #define WM_DIG_IFACE_MASTER_MODE_FIELD_OFFSET                  0x0000
+    /* DIG_IFACE -> LRSWAP */
+    #define WM_DIG_IFACE_LRSWAP_FIELD_MASK                         0xFFFFFFFF /* Swaps LR clock polarity */
+    #define WM_DIG_IFACE_LRSWAP_FIELD_OFFSET                       0x0000
+    /* DIG_IFACE -> LRP */
+    #define WM_DIG_IFACE_LRP_FIELD_MASK                            0xFFFFFFFF /* DACLRC phase control (in left, right or I2S modes) */
+    #define WM_DIG_IFACE_LRP_FIELD_OFFSET                          0x0000
+      #define WM_DIG_IFACE_LRP_HIGH                                0x0001 /*  */
+      #define WM_DIG_IFACE_LRP_LOW                                 0x0001 /*  */
     /* DIG_IFACE -> IWL */
     #define WM_DIG_IFACE_IWL_FIELD_MASK                            0x000C /* Word Length. Audio data size */
     #define WM_DIG_IFACE_IWL_FIELD_OFFSET                          0x0002
@@ -117,8 +159,9 @@
       #define WM_DIG_IFACE_FORMAT_DSP                              0x0003 /* DSP Mode. frame sync + 2 data packed words */
 
 /* ACTIVE Register Fields */
-    /* ACTIVE -> Flags */
-    #define WM_ACTIVE_ENABLE                                       0x0001 /* Enables Digital Audio interface */
+    /* ACTIVE -> Enable */
+    #define WM_ACTIVE_ENABLE_FIELD_MASK                            0xFFFFFFFF /* Enables Digital Audio interface */
+    #define WM_ACTIVE_ENABLE_FIELD_OFFSET                          0x0000
 
 /* RESET Register Fields */
     /* RESET -> RESET */
@@ -189,12 +232,50 @@
 /**
  * @brief reads the VOLUME field from the device 
  * @param dev ptr to wm8731 device
- * @return WM_RIGHT_IN_VOLUME_MIN -34.5dB
+ * @return WM_RIGHT_IN_VOLUME_MIN minimum -34.5dB
  * @return WM_RIGHT_IN_VOLUME_0DB 0db Gain
- * @return WM_RIGHT_IN_VOLUME_MAX +12dB
+ * @return WM_RIGHT_IN_VOLUME_MAX maximum +12dB
  * @return WM_RIGHT_IN_VOLUME_STEP 1.5dB Step
  */
 #define wm_get_right_in_volume(dev) regdev_read_field(dev->mRegDev, &(dev)->mRightIn, WM_RIGHT_IN_VOLUME_MASK )
+
+/**
+ * @brief reads the MICBOOST field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_an_path_micboost(dev) regdev_read_field(dev->mRegDev, &(dev)->mAnPath, WM_AN_PATH_MICBOOST_MASK )
+
+/**
+ * @brief reads the MUTEMIC field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_an_path_mutemic(dev) regdev_read_field(dev->mRegDev, &(dev)->mAnPath, WM_AN_PATH_MUTEMIC_MASK )
+
+/**
+ * @brief reads the INSEL field from the device 
+ * @param dev ptr to wm8731 device
+ * @return WM_AN_PATH_INSEL_MIC Selects Microphone
+ * @return WM_AN_PATH_INSEL_LINE Selects Line-in
+ */
+#define wm_get_an_path_insel(dev) regdev_read_field(dev->mRegDev, &(dev)->mAnPath, WM_AN_PATH_INSEL_MASK )
+
+/**
+ * @brief reads the BYPASS field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_an_path_bypass(dev) regdev_read_field(dev->mRegDev, &(dev)->mAnPath, WM_AN_PATH_BYPASS_MASK )
+
+/**
+ * @brief reads the DACSEL field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_an_path_dacsel(dev) regdev_read_field(dev->mRegDev, &(dev)->mAnPath, WM_AN_PATH_DACSEL_MASK )
+
+/**
+ * @brief reads the SIDETONE field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_an_path_sidetone(dev) regdev_read_field(dev->mRegDev, &(dev)->mAnPath, WM_AN_PATH_SIDETONE_MASK )
 
 /**
  * @brief reads the SIDEATT field from the device 
@@ -207,6 +288,12 @@
 #define wm_get_an_path_sideatt(dev) regdev_read_field(dev->mRegDev, &(dev)->mAnPath, WM_AN_PATH_SIDEATT_MASK )
 
 /**
+ * @brief reads the ADCHPD field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_dig_path_adchpd(dev) regdev_read_field(dev->mRegDev, &(dev)->mDigPath, WM_DIG_PATH_ADCHPD_MASK )
+
+/**
  * @brief reads the DEEMP field from the device 
  * @param dev ptr to wm8731 device
  * @return WM_DIG_PATH_DEEMP_DIS Disable
@@ -215,6 +302,92 @@
  * @return WM_DIG_PATH_DEEMP_48KHZ 48 kHz
  */
 #define wm_get_dig_path_deemp(dev) regdev_read_field(dev->mRegDev, &(dev)->mDigPath, WM_DIG_PATH_DEEMP_MASK )
+
+/**
+ * @brief reads the DACMU field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_dig_path_dacmu(dev) regdev_read_field(dev->mRegDev, &(dev)->mDigPath, WM_DIG_PATH_DACMU_MASK )
+
+/**
+ * @brief reads the HPOR field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_dig_path_hpor(dev) regdev_read_field(dev->mRegDev, &(dev)->mDigPath, WM_DIG_PATH_HPOR_MASK )
+
+/**
+ * @brief reads the LINEINPD field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_power_dwn_lineinpd(dev) regdev_read_field(dev->mRegDev, &(dev)->mPowerDwn, WM_POWER_DWN_LINEINPD_MASK )
+
+/**
+ * @brief reads the MICPD field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_power_dwn_micpd(dev) regdev_read_field(dev->mRegDev, &(dev)->mPowerDwn, WM_POWER_DWN_MICPD_MASK )
+
+/**
+ * @brief reads the ADCPD field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_power_dwn_adcpd(dev) regdev_read_field(dev->mRegDev, &(dev)->mPowerDwn, WM_POWER_DWN_ADCPD_MASK )
+
+/**
+ * @brief reads the DACPD field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_power_dwn_dacpd(dev) regdev_read_field(dev->mRegDev, &(dev)->mPowerDwn, WM_POWER_DWN_DACPD_MASK )
+
+/**
+ * @brief reads the OUTPD field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_power_dwn_outpd(dev) regdev_read_field(dev->mRegDev, &(dev)->mPowerDwn, WM_POWER_DWN_OUTPD_MASK )
+
+/**
+ * @brief reads the OSCPD field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_power_dwn_oscpd(dev) regdev_read_field(dev->mRegDev, &(dev)->mPowerDwn, WM_POWER_DWN_OSCPD_MASK )
+
+/**
+ * @brief reads the CLKOUTPD field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_power_dwn_clkoutpd(dev) regdev_read_field(dev->mRegDev, &(dev)->mPowerDwn, WM_POWER_DWN_CLKOUTPD_MASK )
+
+/**
+ * @brief reads the POWEROFF field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_power_dwn_poweroff(dev) regdev_read_field(dev->mRegDev, &(dev)->mPowerDwn, WM_POWER_DWN_POWEROFF_MASK )
+
+/**
+ * @brief reads the BLCKINV field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_dig_iface_blckinv(dev) regdev_read_field(dev->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_BLCKINV_MASK )
+
+/**
+ * @brief reads the MASTER_MODE field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_dig_iface_master_mode(dev) regdev_read_field(dev->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_MASTER_MODE_MASK )
+
+/**
+ * @brief reads the LRSWAP field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_dig_iface_lrswap(dev) regdev_read_field(dev->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_LRSWAP_MASK )
+
+/**
+ * @brief reads the LRP field from the device 
+ * @param dev ptr to wm8731 device
+ * @return WM_DIG_IFACE_LRP_HIGH 
+ * @return WM_DIG_IFACE_LRP_LOW 
+ */
+#define wm_get_dig_iface_lrp(dev) regdev_read_field(dev->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_LRP_MASK )
 
 /**
  * @brief reads the IWL field from the device 
@@ -235,6 +408,12 @@
  * @return WM_DIG_IFACE_FORMAT_DSP DSP Mode. frame sync + 2 data packed words
  */
 #define wm_get_dig_iface_format(dev) regdev_read_field(dev->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_FORMAT_MASK )
+
+/**
+ * @brief reads the Enable field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_get_active_enable(dev) regdev_read_field(dev->mRegDev, &(dev)->mActive, WM_ACTIVE_ENABLE_MASK )
 
 /**
  * @brief reads the RESET field from the device 
@@ -261,12 +440,50 @@
 /**
  * @brief writes the VOLUME field from the device 
  * @param dev ptr to wm8731 device
- * @option WM_RIGHT_IN_VOLUME_MIN -34.5dB
+ * @option WM_RIGHT_IN_VOLUME_MIN minimum -34.5dB
  * @option WM_RIGHT_IN_VOLUME_0DB 0db Gain
- * @option WM_RIGHT_IN_VOLUME_MAX +12dB
+ * @option WM_RIGHT_IN_VOLUME_MAX maximum +12dB
  * @option WM_RIGHT_IN_VOLUME_STEP 1.5dB Step
  */
 #define wm_set_right_in_volume(dev) regdev_write_field(dev->mRegDev, &(dev)->mRightIn, WM_RIGHT_IN_VOLUME_MASK )
+
+/**
+ * @brief writes the MICBOOST field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_an_path_micboost(dev) regdev_write_field(dev->mRegDev, &(dev)->mAnPath, WM_AN_PATH_MICBOOST_MASK )
+
+/**
+ * @brief writes the MUTEMIC field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_an_path_mutemic(dev) regdev_write_field(dev->mRegDev, &(dev)->mAnPath, WM_AN_PATH_MUTEMIC_MASK )
+
+/**
+ * @brief writes the INSEL field from the device 
+ * @param dev ptr to wm8731 device
+ * @option WM_AN_PATH_INSEL_MIC Selects Microphone
+ * @option WM_AN_PATH_INSEL_LINE Selects Line-in
+ */
+#define wm_set_an_path_insel(dev) regdev_write_field(dev->mRegDev, &(dev)->mAnPath, WM_AN_PATH_INSEL_MASK )
+
+/**
+ * @brief writes the BYPASS field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_an_path_bypass(dev) regdev_write_field(dev->mRegDev, &(dev)->mAnPath, WM_AN_PATH_BYPASS_MASK )
+
+/**
+ * @brief writes the DACSEL field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_an_path_dacsel(dev) regdev_write_field(dev->mRegDev, &(dev)->mAnPath, WM_AN_PATH_DACSEL_MASK )
+
+/**
+ * @brief writes the SIDETONE field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_an_path_sidetone(dev) regdev_write_field(dev->mRegDev, &(dev)->mAnPath, WM_AN_PATH_SIDETONE_MASK )
 
 /**
  * @brief writes the SIDEATT field from the device 
@@ -279,6 +496,12 @@
 #define wm_set_an_path_sideatt(dev) regdev_write_field(dev->mRegDev, &(dev)->mAnPath, WM_AN_PATH_SIDEATT_MASK )
 
 /**
+ * @brief writes the ADCHPD field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_dig_path_adchpd(dev) regdev_write_field(dev->mRegDev, &(dev)->mDigPath, WM_DIG_PATH_ADCHPD_MASK )
+
+/**
  * @brief writes the DEEMP field from the device 
  * @param dev ptr to wm8731 device
  * @option WM_DIG_PATH_DEEMP_DIS Disable
@@ -287,6 +510,92 @@
  * @option WM_DIG_PATH_DEEMP_48KHZ 48 kHz
  */
 #define wm_set_dig_path_deemp(dev) regdev_write_field(dev->mRegDev, &(dev)->mDigPath, WM_DIG_PATH_DEEMP_MASK )
+
+/**
+ * @brief writes the DACMU field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_dig_path_dacmu(dev) regdev_write_field(dev->mRegDev, &(dev)->mDigPath, WM_DIG_PATH_DACMU_MASK )
+
+/**
+ * @brief writes the HPOR field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_dig_path_hpor(dev) regdev_write_field(dev->mRegDev, &(dev)->mDigPath, WM_DIG_PATH_HPOR_MASK )
+
+/**
+ * @brief writes the LINEINPD field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_power_dwn_lineinpd(dev) regdev_write_field(dev->mRegDev, &(dev)->mPowerDwn, WM_POWER_DWN_LINEINPD_MASK )
+
+/**
+ * @brief writes the MICPD field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_power_dwn_micpd(dev) regdev_write_field(dev->mRegDev, &(dev)->mPowerDwn, WM_POWER_DWN_MICPD_MASK )
+
+/**
+ * @brief writes the ADCPD field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_power_dwn_adcpd(dev) regdev_write_field(dev->mRegDev, &(dev)->mPowerDwn, WM_POWER_DWN_ADCPD_MASK )
+
+/**
+ * @brief writes the DACPD field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_power_dwn_dacpd(dev) regdev_write_field(dev->mRegDev, &(dev)->mPowerDwn, WM_POWER_DWN_DACPD_MASK )
+
+/**
+ * @brief writes the OUTPD field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_power_dwn_outpd(dev) regdev_write_field(dev->mRegDev, &(dev)->mPowerDwn, WM_POWER_DWN_OUTPD_MASK )
+
+/**
+ * @brief writes the OSCPD field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_power_dwn_oscpd(dev) regdev_write_field(dev->mRegDev, &(dev)->mPowerDwn, WM_POWER_DWN_OSCPD_MASK )
+
+/**
+ * @brief writes the CLKOUTPD field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_power_dwn_clkoutpd(dev) regdev_write_field(dev->mRegDev, &(dev)->mPowerDwn, WM_POWER_DWN_CLKOUTPD_MASK )
+
+/**
+ * @brief writes the POWEROFF field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_power_dwn_poweroff(dev) regdev_write_field(dev->mRegDev, &(dev)->mPowerDwn, WM_POWER_DWN_POWEROFF_MASK )
+
+/**
+ * @brief writes the BLCKINV field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_dig_iface_blckinv(dev) regdev_write_field(dev->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_BLCKINV_MASK )
+
+/**
+ * @brief writes the MASTER_MODE field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_dig_iface_master_mode(dev) regdev_write_field(dev->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_MASTER_MODE_MASK )
+
+/**
+ * @brief writes the LRSWAP field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_dig_iface_lrswap(dev) regdev_write_field(dev->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_LRSWAP_MASK )
+
+/**
+ * @brief writes the LRP field from the device 
+ * @param dev ptr to wm8731 device
+ * @option WM_DIG_IFACE_LRP_HIGH 
+ * @option WM_DIG_IFACE_LRP_LOW 
+ */
+#define wm_set_dig_iface_lrp(dev) regdev_write_field(dev->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_LRP_MASK )
 
 /**
  * @brief writes the IWL field from the device 
@@ -309,6 +618,12 @@
 #define wm_set_dig_iface_format(dev) regdev_write_field(dev->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_FORMAT_MASK )
 
 /**
+ * @brief writes the Enable field from the device 
+ * @param dev ptr to wm8731 device
+ */
+#define wm_set_active_enable(dev) regdev_write_field(dev->mRegDev, &(dev)->mActive, WM_ACTIVE_ENABLE_MASK )
+
+/**
  * @brief writes the RESET field from the device 
  * @param dev ptr to wm8731 device
  */
@@ -323,13 +638,12 @@
  * @brief Device configured for stereo input with 16bit data
  * @param dev ptr to wm8731 device
  */
-#define WM_LOAD_CONFIG_16BIT_LINE_IN(dev) \
-    wm_write_reg( (dev), &(dev)->mReset, 0x0000);    /* RESET: 0 , delay: 100 */      \
-    MRT_DELAY_MS(100);  \
-    wm_write_reg( (dev), &(dev)->mLeftIn, 0x0016);   /* MUTE: False , LRINBOTH: False , VOLUME: 0dB */ \
-    wm_write_reg( (dev), &(dev)->mRightIn, 0x0016);  /* MUTE: False , LRINBOTH: False , VOLUME: 0dB */ \
-    wm_write_reg( (dev), &(dev)->mDigPath, 0x0001);  /* ADCHPD: True */               \
-    wm_write_reg( (dev), &(dev)->mPowerDwn, 0x001A); /* MICPD: True , DACPD: True , OUTPD: True */ \
-    wm_write_reg( (dev), &(dev)->mDigIface, 0x0002); /* IWL: 16BIT , FORMAT: I2S */   \
-    wm_write_reg( (dev), &(dev)->mActive, 0x0001);   /* Enable: True */               \
+#define wm_load_config_16bit_line_in(dev) \
+wm_write_reg( (dev), &(dev)->mReset, 0x0000);    /* RESET: 0 , delay: 100 */      \
+wm_write_reg( (dev), &(dev)->mLeftIn, 0x0016);   /* MUTE: False , LRINBOTH: False , VOLUME: 0dB */ \
+wm_write_reg( (dev), &(dev)->mRightIn, 0x0016);  /* MUTE: False , LRINBOTH: False , VOLUME: 0dB */ \
+wm_write_reg( (dev), &(dev)->mDigPath, 0x0001);  /* ADCHPD: True */               \
+wm_write_reg( (dev), &(dev)->mPowerDwn, 0x0001); /* MICPD: True , DACPD: True , OUTPD: True */ \
+wm_write_reg( (dev), &(dev)->mDigIface, 0x0002); /* IWL: 16BIT , FORMAT: I2S */   \
+wm_write_reg( (dev), &(dev)->mActive, 0x0001);   /* Enable: True */               \
 

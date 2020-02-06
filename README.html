@@ -19,770 +19,92 @@
 
 <br/>
 
-
+<div class="regmap" align="center">
 <hr class="section">
 <h2 class="right"> Register Map</h2>
 <hr class="thick">
 
-<table class="fields">
+<table class="fields" width="95%">
     <tr>
-        <th>Name</th>
-        <th>Address</th>
-        <th>Type</th>
-        <th>Access</th>
-        <th>Default</th>
-        <th>Description</th>
+      <th width="14%">Register</th>
+      <th width="1%">RW</th>
+      <th width="5.3125%"> 15</th>
+      <th width="5.3125%"> 14</th>
+      <th width="5.3125%"> 13</th>
+      <th width="5.3125%"> 12</th>
+      <th width="5.3125%"> 11</th>
+      <th width="5.3125%"> 10</th>
+      <th width="5.3125%"> 9</th>
+      <th width="5.3125%"> 8</th>
+      <th width="5.3125%"> 7</th>
+      <th width="5.3125%"> 6</th>
+      <th width="5.3125%"> 5</th>
+      <th width="5.3125%"> 4</th>
+      <th width="5.3125%"> 3</th>
+      <th width="5.3125%"> 2</th>
+      <th width="5.3125%"> 1</th>
+      <th width="5.3125%"> 0</th>
     </tr>
-    <tr>
-        <td><a href="#register_left_in_detail">LEFT_IN</a></td>
-        <td>0x00</td>
-        <td>uint16_t</td>
-        <td>RW</td>
-        <td>0x0097</td>
-        <td>Left line in control</td>
-    </tr>
-    <tr>
-        <td><a href="#register_right_in_detail">RIGHT_IN</a></td>
-        <td>0x01</td>
-        <td>uint16_t</td>
-        <td>RW</td>
-        <td>0x0097</td>
-        <td>Right line in control</td>
-    </tr>
-    <tr>
-        <td><a href="#register_left_out_detail">LEFT_OUT</a></td>
-        <td>0x02</td>
-        <td>uint16_t</td>
-        <td>RW</td>
-        <td>0x0079</td>
-        <td>Left Headphone Out control</td>
-    </tr>
-    <tr>
-        <td><a href="#register_right_out_detail">RIGHT_OUT</a></td>
-        <td>0x03</td>
-        <td>uint16_t</td>
-        <td>RW</td>
-        <td>0x0079</td>
-        <td>Right Headphone Out control</td>
-    </tr>
-    <tr>
-        <td><a href="#register_an_path_detail">AN_PATH</a></td>
-        <td>0x04</td>
-        <td>uint16_t</td>
-        <td>RW</td>
-        <td>0x000A</td>
-        <td>Analogue audio path control</td>
-    </tr>
-    <tr>
-        <td><a href="#register_dig_path_detail">DIG_PATH</a></td>
-        <td>0x05</td>
-        <td>uint16_t</td>
-        <td>RW</td>
-        <td>0x0008</td>
-        <td>Digital audio path control</td>
-    </tr>
-    <tr>
-        <td><a href="#register_power_dwn_detail">POWER_DWN</a></td>
-        <td>0x06</td>
-        <td>uint16_t</td>
-        <td>RW</td>
-        <td>0x009F</td>
-        <td>Power Down control</td>
-    </tr>
-    <tr>
-        <td><a href="#register_dig_iface_detail">DIG_IFACE</a></td>
-        <td>0x07</td>
-        <td>uint16_t</td>
-        <td>RW</td>
-        <td>0x009F</td>
-        <td>Digital audio interface format</td>
-    </tr>
-    <tr>
-        <td><a href="#register_sample_detail">SAMPLE</a></td>
-        <td>0x08</td>
-        <td>uint16_t</td>
-        <td>RW</td>
-        <td>0x0000</td>
-        <td>Sampling control</td>
-    </tr>
-    <tr>
-        <td><a href="#register_active_detail">ACTIVE</a></td>
-        <td>0x09</td>
-        <td>uint16_t</td>
-        <td>RW</td>
-        <td>0x0000</td>
-        <td>Active Control</td>
-    </tr>
-    <tr>
-        <td><a href="#register_reset_detail">RESET</a></td>
-        <td>0x0F</td>
-        <td>uint16_t</td>
-        <td>RW</td>
-        <td>0xFFFF</td>
-        <td>Reset control</td>
-    </tr>
+     <tr><th rowspan="1">LEFT_IN</th><th rowspan="1">RW</th>
+<td class="empty" colspan="7">.</td><td class="field" colspan="1"><a data-tt data-tt-lbl="Left to Right Channel Line Input Volume and Mute Data Load Control" data-tt-msg="">LRINBOTH</a></td><td class="field" colspan="1"><a data-tt data-tt-lbl="Mutes Left input" data-tt-msg="">MUTE</a></td><td class="empty" colspan="2">.</td><td class="field" colspan="5"><a data-tt data-tt-lbl="Volume control for Left input in 1.5dB steps range -34.5dB -> +12dB" data-tt-msg="
+	x00 = -34.5dB
+	x16 = 0db Gain
+	x20 = +12dB
+	x01 = 1.5dB Step">VOLUME</a></td></tr>
 
-</table>
+     <tr><th rowspan="1">RIGHT_IN</th><th rowspan="1">RW</th>
+<td class="empty" colspan="7">.</td><td class="field" colspan="1"><a data-tt data-tt-lbl="Left to Right Channel Line Input Volume and Mute Data Load Control" data-tt-msg="">LRINBOTH</a></td><td class="field" colspan="1"><a data-tt data-tt-lbl="Mutes Right input" data-tt-msg="">MUTE</a></td><td class="empty" colspan="2">.</td><td class="field" colspan="5"><a data-tt data-tt-lbl="Volume control for right input in 1.5dB steps range -34.5dB -> +12dB" data-tt-msg="
+	x00 = minimum -34.5dB
+	x16 = 0db Gain
+	x20 = maximum +12dB
+	x01 = 1.5dB Step">VOLUME</a></td></tr>
 
+     <tr><th rowspan="1">LEFT_OUT</th><th rowspan="1">RW</th>
+<td class="empty" colspan="16">.</td></tr>
 
+     <tr><th rowspan="1">RIGHT_OUT</th><th rowspan="1">RW</th>
+<td class="empty" colspan="16">.</td></tr>
 
-<hr class="section">
-<h2 class="right"> Registers</h2>
-<hr class="thick">
+     <tr><th rowspan="1">AN_PATH</th><th rowspan="1">RW</th>
+<td class="empty" colspan="8">.</td><td class="field" colspan="2"><a data-tt data-tt-lbl="Side Tone attenuation" data-tt-msg="
+	b00 = 6dB of attenuation
+	b01 = 9dB of attenuation
+	b10 = 12dB of attenuation
+	b11 = 15dB of attenuation">SIDEATT</a></td><td class="empty" colspan="6">.</td></tr>
 
+     <tr><th rowspan="1">DIG_PATH</th><th rowspan="1">RW</th>
+<td class="empty" colspan="13">.</td><td class="field" colspan="2"><a data-tt data-tt-lbl="De-emphasis Control" data-tt-msg="
+	b00 = Disable
+	b01 = 32 kHz
+	b10 = 44.1 kHz
+	b11 = 48 kHz">DEEMP</a></td><td class="empty" colspan="1">.</td></tr>
 
+     <tr><th rowspan="1">POWER_DWN</th><th rowspan="1">RW</th>
+<td class="empty" colspan="16">.</td></tr>
 
-<div id="register_left_in_detail" class="packet">
-<h2>LEFT_IN </h2>
-<hr/>
-<ul>
-    <li class="note">  Address: <b>[0x00]</b></li>
-    <li class="note">  Default: <b>[0x0097]</b></li>
-</ul>
+     <tr><th rowspan="1">DIG_IFACE</th><th rowspan="1">RW</th>
+<td class="empty" colspan="12">.</td><td class="field" colspan="2"><a data-tt data-tt-lbl="Word Length. Audio data size" data-tt-msg="
+	b11 = 32 bit sample size
+	b10 = 24 bit sample size
+	b01 = 20 bit sample size
+	b00 = 16 bit sample size">IWL</a></td><td class="field" colspan="2"><a data-tt data-tt-lbl="Selects digital audio format" data-tt-msg="
+	b00 = MSB-First right justified
+	b01 = MSB-first left justified
+	b10 = I2S format. MSB-First left -1 justified
+	b11 = DSP Mode. frame sync + 2 data packed words">FORMAT</a></td></tr>
 
-<p>Left line in control</p>
+     <tr><th rowspan="1">SAMPLE</th><th rowspan="1">RW</th>
+<td class="empty" colspan="16">.</td></tr>
 
+     <tr><th rowspan="1">ACTIVE</th><th rowspan="1">RW</th>
+<td class="empty" colspan="16">.</td></tr>
 
-<table class="fields" width="80%">
-  <tr>
-    <th class="smallCell">bit</th>
-    <th> 15</th>
-    <th> 14</th>
-    <th> 13</th>
-    <th> 12</th>
-    <th> 11</th>
-    <th> 10</th>
-    <th> 9</th>
-    <th> 8</th>
-    <th> 7</th>
-    <th> 6</th>
-    <th> 5</th>
-    <th> 4</th>
-    <th> 3</th>
-    <th> 2</th>
-    <th> 1</th>
-    <th> 0</th>
-  </tr>
-  <tr>
-    <th class="smallCell">Field</th>
-   <td class="empty" colspan="7"></td>
-<td class="field" colspan="1">LRINBOTH</td>
-<td class="field" colspan="1">MUTE</td>
-<td class="empty" colspan="2"></td>
-<td class="field" colspan="5">VOLUME</td>
+     <tr><th rowspan="1">RESET</th><th rowspan="1">RW</th>
+<td class="empty" colspan="8">.</td><td class="field" colspan="8"><a data-tt data-tt-lbl="Setting to 0 resets the device" data-tt-msg="">RESET</a></td></tr>
 
-  </tr>
-  <tr>
-    <th class="smallCell">Default</th>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="one" >1</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="one" >1</td>
-      <td class="zero" >0</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-   </tr>
-</table>
-<div id="register_right_in_detail" class="packet">
-<h2>RIGHT_IN </h2>
-<hr/>
-<ul>
-    <li class="note">  Address: <b>[0x01]</b></li>
-    <li class="note">  Default: <b>[0x0097]</b></li>
-</ul>
+  </table>
+</div>
 
-<p>Right line in control</p>
-
-
-<table class="fields" width="80%">
-  <tr>
-    <th class="smallCell">bit</th>
-    <th> 15</th>
-    <th> 14</th>
-    <th> 13</th>
-    <th> 12</th>
-    <th> 11</th>
-    <th> 10</th>
-    <th> 9</th>
-    <th> 8</th>
-    <th> 7</th>
-    <th> 6</th>
-    <th> 5</th>
-    <th> 4</th>
-    <th> 3</th>
-    <th> 2</th>
-    <th> 1</th>
-    <th> 0</th>
-  </tr>
-  <tr>
-    <th class="smallCell">Field</th>
-   <td class="empty" colspan="7"></td>
-<td class="field" colspan="1">LRINBOTH</td>
-<td class="field" colspan="1">MUTE</td>
-<td class="empty" colspan="2"></td>
-<td class="field" colspan="5">VOLUME</td>
-
-  </tr>
-  <tr>
-    <th class="smallCell">Default</th>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="one" >1</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="one" >1</td>
-      <td class="zero" >0</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-   </tr>
-</table>
-<div id="register_left_out_detail" class="packet">
-<h2>LEFT_OUT </h2>
-<hr/>
-<ul>
-    <li class="note">  Address: <b>[0x02]</b></li>
-    <li class="note">  Default: <b>[0x0079]</b></li>
-</ul>
-
-<p>Left Headphone Out control</p>
-
-
-<table class="fields" width="80%">
-  <tr>
-    <th class="smallCell">bit</th>
-    <th> 15</th>
-    <th> 14</th>
-    <th> 13</th>
-    <th> 12</th>
-    <th> 11</th>
-    <th> 10</th>
-    <th> 9</th>
-    <th> 8</th>
-    <th> 7</th>
-    <th> 6</th>
-    <th> 5</th>
-    <th> 4</th>
-    <th> 3</th>
-    <th> 2</th>
-    <th> 1</th>
-    <th> 0</th>
-  </tr>
-  <tr>
-    <th class="smallCell">Field</th>
-   <td class="empty" colspan="17"></td>
-
-  </tr>
-  <tr>
-    <th class="smallCell">Default</th>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="one" >1</td>
-   </tr>
-</table>
-<div id="register_right_out_detail" class="packet">
-<h2>RIGHT_OUT </h2>
-<hr/>
-<ul>
-    <li class="note">  Address: <b>[0x03]</b></li>
-    <li class="note">  Default: <b>[0x0079]</b></li>
-</ul>
-
-<p>Right Headphone Out control</p>
-
-
-<table class="fields" width="80%">
-  <tr>
-    <th class="smallCell">bit</th>
-    <th> 15</th>
-    <th> 14</th>
-    <th> 13</th>
-    <th> 12</th>
-    <th> 11</th>
-    <th> 10</th>
-    <th> 9</th>
-    <th> 8</th>
-    <th> 7</th>
-    <th> 6</th>
-    <th> 5</th>
-    <th> 4</th>
-    <th> 3</th>
-    <th> 2</th>
-    <th> 1</th>
-    <th> 0</th>
-  </tr>
-  <tr>
-    <th class="smallCell">Field</th>
-   <td class="empty" colspan="17"></td>
-
-  </tr>
-  <tr>
-    <th class="smallCell">Default</th>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="one" >1</td>
-   </tr>
-</table>
-<div id="register_an_path_detail" class="packet">
-<h2>AN_PATH </h2>
-<hr/>
-<ul>
-    <li class="note">  Address: <b>[0x04]</b></li>
-    <li class="note">  Default: <b>[0x000A]</b></li>
-</ul>
-
-<p>Analogue audio path control</p>
-
-
-<table class="fields" width="80%">
-  <tr>
-    <th class="smallCell">bit</th>
-    <th> 15</th>
-    <th> 14</th>
-    <th> 13</th>
-    <th> 12</th>
-    <th> 11</th>
-    <th> 10</th>
-    <th> 9</th>
-    <th> 8</th>
-    <th> 7</th>
-    <th> 6</th>
-    <th> 5</th>
-    <th> 4</th>
-    <th> 3</th>
-    <th> 2</th>
-    <th> 1</th>
-    <th> 0</th>
-  </tr>
-  <tr>
-    <th class="smallCell">Field</th>
-   <td class="empty" colspan="8"></td>
-<td class="field" colspan="2">SIDEATT</td>
-<td class="field" colspan="1">SIDETONE</td>
-<td class="field" colspan="1">DACSEL</td>
-<td class="field" colspan="1">BYPASS</td>
-<td class="field" colspan="1">INSEL</td>
-<td class="field" colspan="1">MUTEMIC</td>
-<td class="field" colspan="1">MICBOOST</td>
-
-  </tr>
-  <tr>
-    <th class="smallCell">Default</th>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="one" >1</td>
-      <td class="zero" >0</td>
-      <td class="one" >1</td>
-      <td class="zero" >0</td>
-   </tr>
-</table>
-<div id="register_dig_path_detail" class="packet">
-<h2>DIG_PATH </h2>
-<hr/>
-<ul>
-    <li class="note">  Address: <b>[0x05]</b></li>
-    <li class="note">  Default: <b>[0x0008]</b></li>
-</ul>
-
-<p>Digital audio path control</p>
-
-
-<table class="fields" width="80%">
-  <tr>
-    <th class="smallCell">bit</th>
-    <th> 15</th>
-    <th> 14</th>
-    <th> 13</th>
-    <th> 12</th>
-    <th> 11</th>
-    <th> 10</th>
-    <th> 9</th>
-    <th> 8</th>
-    <th> 7</th>
-    <th> 6</th>
-    <th> 5</th>
-    <th> 4</th>
-    <th> 3</th>
-    <th> 2</th>
-    <th> 1</th>
-    <th> 0</th>
-  </tr>
-  <tr>
-    <th class="smallCell">Field</th>
-   <td class="empty" colspan="11"></td>
-<td class="field" colspan="1">HPOR</td>
-<td class="field" colspan="1">DACMU</td>
-<td class="field" colspan="2">DEEMP</td>
-<td class="field" colspan="1">ADCHPD</td>
-
-  </tr>
-  <tr>
-    <th class="smallCell">Default</th>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="one" >1</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-   </tr>
-</table>
-<div id="register_power_dwn_detail" class="packet">
-<h2>POWER_DWN </h2>
-<hr/>
-<ul>
-    <li class="note">  Address: <b>[0x06]</b></li>
-    <li class="note">  Default: <b>[0x009F]</b></li>
-</ul>
-
-<p>Power Down control</p>
-
-
-<table class="fields" width="80%">
-  <tr>
-    <th class="smallCell">bit</th>
-    <th> 15</th>
-    <th> 14</th>
-    <th> 13</th>
-    <th> 12</th>
-    <th> 11</th>
-    <th> 10</th>
-    <th> 9</th>
-    <th> 8</th>
-    <th> 7</th>
-    <th> 6</th>
-    <th> 5</th>
-    <th> 4</th>
-    <th> 3</th>
-    <th> 2</th>
-    <th> 1</th>
-    <th> 0</th>
-  </tr>
-  <tr>
-    <th class="smallCell">Field</th>
-   <td class="empty" colspan="8"></td>
-<td class="field" colspan="1">POWEROFF</td>
-<td class="field" colspan="1">CLKOUTPD</td>
-<td class="field" colspan="1">OSCPD</td>
-<td class="field" colspan="1">OUTPD</td>
-<td class="field" colspan="1">DACPD</td>
-<td class="field" colspan="1">ADCPD</td>
-<td class="field" colspan="1">MICPD</td>
-<td class="field" colspan="1">LINEINPD</td>
-
-  </tr>
-  <tr>
-    <th class="smallCell">Default</th>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="one" >1</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-   </tr>
-</table>
-<div id="register_dig_iface_detail" class="packet">
-<h2>DIG_IFACE </h2>
-<hr/>
-<ul>
-    <li class="note">  Address: <b>[0x07]</b></li>
-    <li class="note">  Default: <b>[0x009F]</b></li>
-</ul>
-
-<p>Digital audio interface format</p>
-
-
-<table class="fields" width="80%">
-  <tr>
-    <th class="smallCell">bit</th>
-    <th> 15</th>
-    <th> 14</th>
-    <th> 13</th>
-    <th> 12</th>
-    <th> 11</th>
-    <th> 10</th>
-    <th> 9</th>
-    <th> 8</th>
-    <th> 7</th>
-    <th> 6</th>
-    <th> 5</th>
-    <th> 4</th>
-    <th> 3</th>
-    <th> 2</th>
-    <th> 1</th>
-    <th> 0</th>
-  </tr>
-  <tr>
-    <th class="smallCell">Field</th>
-   <td class="empty" colspan="8"></td>
-<td class="field" colspan="1">BLCKINV</td>
-<td class="field" colspan="1">MASTER_MODE</td>
-<td class="field" colspan="1">LRSWAP</td>
-<td class="field" colspan="1">LRP</td>
-<td class="field" colspan="2">IWL</td>
-<td class="field" colspan="2">FORMAT</td>
-
-  </tr>
-  <tr>
-    <th class="smallCell">Default</th>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="one" >1</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-   </tr>
-</table>
-<div id="register_sample_detail" class="packet">
-<h2>SAMPLE </h2>
-<hr/>
-<ul>
-    <li class="note">  Address: <b>[0x08]</b></li>
-    <li class="note">  Default: <b>[0x0000]</b></li>
-</ul>
-
-<p>Sampling control</p>
-
-
-<table class="fields" width="80%">
-  <tr>
-    <th class="smallCell">bit</th>
-    <th> 15</th>
-    <th> 14</th>
-    <th> 13</th>
-    <th> 12</th>
-    <th> 11</th>
-    <th> 10</th>
-    <th> 9</th>
-    <th> 8</th>
-    <th> 7</th>
-    <th> 6</th>
-    <th> 5</th>
-    <th> 4</th>
-    <th> 3</th>
-    <th> 2</th>
-    <th> 1</th>
-    <th> 0</th>
-  </tr>
-  <tr>
-    <th class="smallCell">Field</th>
-   <td class="empty" colspan="17"></td>
-
-  </tr>
-  <tr>
-    <th class="smallCell">Default</th>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-   </tr>
-</table>
-<div id="register_active_detail" class="packet">
-<h2>ACTIVE </h2>
-<hr/>
-<ul>
-    <li class="note">  Address: <b>[0x09]</b></li>
-    <li class="note">  Default: <b>[0x0000]</b></li>
-</ul>
-
-<p>Active Control</p>
-
-
-<table class="fields" width="80%">
-  <tr>
-    <th class="smallCell">bit</th>
-    <th> 15</th>
-    <th> 14</th>
-    <th> 13</th>
-    <th> 12</th>
-    <th> 11</th>
-    <th> 10</th>
-    <th> 9</th>
-    <th> 8</th>
-    <th> 7</th>
-    <th> 6</th>
-    <th> 5</th>
-    <th> 4</th>
-    <th> 3</th>
-    <th> 2</th>
-    <th> 1</th>
-    <th> 0</th>
-  </tr>
-  <tr>
-    <th class="smallCell">Field</th>
-   <td class="empty" colspan="15"></td>
-<td class="field" colspan="1">Enable</td>
-
-  </tr>
-  <tr>
-    <th class="smallCell">Default</th>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-      <td class="zero" >0</td>
-   </tr>
-</table>
-<div id="register_reset_detail" class="packet">
-<h2>RESET </h2>
-<hr/>
-<ul>
-    <li class="note">  Address: <b>[0x0F]</b></li>
-    <li class="note">  Default: <b>[0xFFFF]</b></li>
-</ul>
-
-<p>Reset control</p>
-
-
-<table class="fields" width="80%">
-  <tr>
-    <th class="smallCell">bit</th>
-    <th> 15</th>
-    <th> 14</th>
-    <th> 13</th>
-    <th> 12</th>
-    <th> 11</th>
-    <th> 10</th>
-    <th> 9</th>
-    <th> 8</th>
-    <th> 7</th>
-    <th> 6</th>
-    <th> 5</th>
-    <th> 4</th>
-    <th> 3</th>
-    <th> 2</th>
-    <th> 1</th>
-    <th> 0</th>
-  </tr>
-  <tr>
-    <th class="smallCell">Field</th>
-   <td class="empty" colspan="8"></td>
-<td class="field" colspan="8">RESET</td>
-
-  </tr>
-  <tr>
-    <th class="smallCell">Default</th>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-   </tr>
-</table>
 
 </div>
 </body>
@@ -806,9 +128,8 @@ body {
 }
 
 @media print {
-  .packet {
+  .regmap {
     page-break-inside: avoid;
-    padding-top: 4px;
   }
   .content{
     width: 100%;
@@ -826,6 +147,7 @@ body {
     margin-top: 0;
     padding-top: 4px;
     box-shadow: 5px 10px #AAA;
+    padding-bottom: 50px;
   }
 
   body{
@@ -865,15 +187,14 @@ table {
 td {
   border: 1px solid #000000;
   text-align: left;
-  padding: 5px;
+  padding-top: 6px;
   vertical-align: top;
+  font-size: 9pt;
+  width: 1px;
+  white-space: nowrap;
 }
 
-.smallCell
-{
-    width: 1px;
-    white-space: nowrap;
-}
+
 
 td.zero{
   background-color: #ce927e;
@@ -885,6 +206,7 @@ td.one{
 
 td.empty{
   background-color: #cccccc;
+  color: #cccccc;
 }
 
 td.field{
@@ -902,6 +224,7 @@ th {
   text-align: left;
   padding: 5px;
   background-color: #94b2d3;
+  font-size: 9pt;
 }
 
 li.val{
@@ -957,5 +280,52 @@ table.fixed tr td:last-child{
     width:1%;
     white-space:nowrap;
 }
+
+[data-tt] {
+  position: relative;
+  cursor: help;
+}
+
+[data-tt]:before,
+[data-tt]:after {
+  display: none;
+  position: absolute;
+  top: 0;
+}
+
+[data-tt]:before {
+  border-bottom: .6em solid #09f;
+  border-bottom: .6em solid rgba(0,153,255,0.8);
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  content: "";
+  left: 20px;
+  margin-top: 1em;
+}
+
+[data-tt]:after {
+  background-color: #387aa7;
+  background-color: rgb(162, 197, 221);
+  border: 2px solid #000000;
+  border: 2px solid rgba(0, 0, 0, 1);
+  border-radius: 2px;
+  color: #000000;
+  content: attr(data-tt-lbl) ":\A" attr(data-tt-msg);
+  left: 0;
+  width: 300px;
+  overflow: auto;
+  text-align: left;
+  margin-top: 1.5em;
+  padding: 5px 15px;
+  white-space: pre-wrap;
+  z-index: 100;
+}
+
+[data-tt]:hover:after,
+[data-tt]:hover:before {
+  display: block;
+  overflow: auto;
+}
+
 </style>
 </html>
