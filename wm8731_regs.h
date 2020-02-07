@@ -39,8 +39,8 @@
     #define WM_LEFT_IN_VOLUME_FIELD_MASK                           0x001F /* Volume control for Left input in 1.5dB steps range -34.5dB -> +12dB */
     #define WM_LEFT_IN_VOLUME_FIELD_OFFSET                         0x0000
       #define WM_LEFT_IN_VOLUME_MIN                                0x0000 /* -34.5dB */
-      #define WM_LEFT_IN_VOLUME_0DB                                0x0016 /* 0db Gain */
-      #define WM_LEFT_IN_VOLUME_MAX                                0x0020 /* +12dB */
+      #define WM_LEFT_IN_VOLUME_0DB                                0x001F /* 0db Gain */
+      #define WM_LEFT_IN_VOLUME_MAX                                0x001F /* +12dB */
       #define WM_LEFT_IN_VOLUME_STEP                               0x0001 /* 1.5dB Step */
 
 /* RIGHT_IN Register Fields */
@@ -51,8 +51,8 @@
     #define WM_RIGHT_IN_VOLUME_FIELD_MASK                          0x001F /* Volume control for right input in 1.5dB steps range -34.5dB -> +12dB */
     #define WM_RIGHT_IN_VOLUME_FIELD_OFFSET                        0x0000
       #define WM_RIGHT_IN_VOLUME_MIN                               0x0000 /* minimum -34.5dB */
-      #define WM_RIGHT_IN_VOLUME_0DB                               0x0016 /* 0db Gain */
-      #define WM_RIGHT_IN_VOLUME_MAX                               0x0020 /* maximum +12dB */
+      #define WM_RIGHT_IN_VOLUME_0DB                               0x0015 /* 0db Gain */
+      #define WM_RIGHT_IN_VOLUME_MAX                               0x001F /* maximum +12dB */
       #define WM_RIGHT_IN_VOLUME_STEP                              0x0001 /* 1.5dB Step */
 
 /* AN_PATH Register Fields */
@@ -140,7 +140,7 @@
 #define WM_DIG_IFACE_DEFAULT                                       0x009F
 #define WM_SAMPLE_DEFAULT                                          0x0000
 #define WM_ACTIVE_DEFAULT                                          0x0000
-#define WM_RESET_DEFAULT                                           0xFFFF
+#define WM_RESET_DEFAULT                                           0x0FFF
 
 /*******************************************************************************
   Flag Set/Clear/Check                                                                             
@@ -177,70 +177,70 @@
 *******************************************************************************/
 
 /**
- * @brief reads the VOLUME field from the device 
+ * @brief reads the VOLUME field from the LEFT_IN register 
  * @param dev ptr to wm8731 device
  * @return WM_LEFT_IN_VOLUME_MIN -34.5dB
  * @return WM_LEFT_IN_VOLUME_0DB 0db Gain
  * @return WM_LEFT_IN_VOLUME_MAX +12dB
  * @return WM_LEFT_IN_VOLUME_STEP 1.5dB Step
  */
-#define wm_get_left_in_volume(dev) regdev_read_field(dev->mRegDev, &(dev)->mLeftIn, WM_LEFT_IN_VOLUME_MASK )
+#define wm_get_left_in_volume(dev) regdev_read_field(&(dev)->mRegDev, &(dev)->mLeftIn, WM_LEFT_IN_VOLUME_FIELD_MASK )
 
 /**
- * @brief reads the VOLUME field from the device 
+ * @brief reads the VOLUME field from the RIGHT_IN register 
  * @param dev ptr to wm8731 device
  * @return WM_RIGHT_IN_VOLUME_MIN minimum -34.5dB
  * @return WM_RIGHT_IN_VOLUME_0DB 0db Gain
  * @return WM_RIGHT_IN_VOLUME_MAX maximum +12dB
  * @return WM_RIGHT_IN_VOLUME_STEP 1.5dB Step
  */
-#define wm_get_right_in_volume(dev) regdev_read_field(dev->mRegDev, &(dev)->mRightIn, WM_RIGHT_IN_VOLUME_MASK )
+#define wm_get_right_in_volume(dev) regdev_read_field(&(dev)->mRegDev, &(dev)->mRightIn, WM_RIGHT_IN_VOLUME_FIELD_MASK )
 
 /**
- * @brief reads the SIDEATT field from the device 
+ * @brief reads the SIDEATT field from the AN_PATH register 
  * @param dev ptr to wm8731 device
  * @return WM_AN_PATH_SIDEATT_6DB 6dB of attenuation
  * @return WM_AN_PATH_SIDEATT_9DB 9dB of attenuation
  * @return WM_AN_PATH_SIDEATT_12DB 12dB of attenuation
  * @return WM_AN_PATH_SIDEATT_15DB 15dB of attenuation
  */
-#define wm_get_an_path_sideatt(dev) regdev_read_field(dev->mRegDev, &(dev)->mAnPath, WM_AN_PATH_SIDEATT_MASK )
+#define wm_get_an_path_sideatt(dev) regdev_read_field(&(dev)->mRegDev, &(dev)->mAnPath, WM_AN_PATH_SIDEATT_FIELD_MASK )
 
 /**
- * @brief reads the DEEMP field from the device 
+ * @brief reads the DEEMP field from the DIG_PATH register 
  * @param dev ptr to wm8731 device
  * @return WM_DIG_PATH_DEEMP_DIS Disable
  * @return WM_DIG_PATH_DEEMP_32KHZ 32 kHz
  * @return WM_DIG_PATH_DEEMP_44_1KHZ 44.1 kHz
  * @return WM_DIG_PATH_DEEMP_48KHZ 48 kHz
  */
-#define wm_get_dig_path_deemp(dev) regdev_read_field(dev->mRegDev, &(dev)->mDigPath, WM_DIG_PATH_DEEMP_MASK )
+#define wm_get_dig_path_deemp(dev) regdev_read_field(&(dev)->mRegDev, &(dev)->mDigPath, WM_DIG_PATH_DEEMP_FIELD_MASK )
 
 /**
- * @brief reads the IWL field from the device 
+ * @brief reads the IWL field from the DIG_IFACE register 
  * @param dev ptr to wm8731 device
  * @return WM_DIG_IFACE_IWL_32BIT 32 bit sample size
  * @return WM_DIG_IFACE_IWL_24BIT 24 bit sample size
  * @return WM_DIG_IFACE_IWL_20BIT 20 bit sample size
  * @return WM_DIG_IFACE_IWL_16BIT 16 bit sample size
  */
-#define wm_get_dig_iface_iwl(dev) regdev_read_field(dev->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_IWL_MASK )
+#define wm_get_dig_iface_iwl(dev) regdev_read_field(&(dev)->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_IWL_FIELD_MASK )
 
 /**
- * @brief reads the FORMAT field from the device 
+ * @brief reads the FORMAT field from the DIG_IFACE register 
  * @param dev ptr to wm8731 device
  * @return WM_DIG_IFACE_FORMAT_RIGHT_JUST MSB-First right justified
  * @return WM_DIG_IFACE_FORMAT_LEFT_JUST MSB-first left justified
  * @return WM_DIG_IFACE_FORMAT_I2S I2S format. MSB-First left -1 justified
  * @return WM_DIG_IFACE_FORMAT_DSP DSP Mode. frame sync + 2 data packed words
  */
-#define wm_get_dig_iface_format(dev) regdev_read_field(dev->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_FORMAT_MASK )
+#define wm_get_dig_iface_format(dev) regdev_read_field(&(dev)->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_FORMAT_FIELD_MASK )
 
 /**
- * @brief reads the RESET field from the device 
+ * @brief reads the RESET field from the RESET register 
  * @param dev ptr to wm8731 device
  */
-#define wm_get_reset_reset(dev) regdev_read_field(dev->mRegDev, &(dev)->mReset, WM_RESET_RESET_MASK )
+#define wm_get_reset_reset(dev) regdev_read_field(&(dev)->mRegDev, &(dev)->mReset, WM_RESET_RESET_FIELD_MASK )
 
 
 
@@ -249,70 +249,70 @@
 *******************************************************************************/
 
 /**
- * @brief writes the VOLUME field from the device 
+ * @brief writes the VOLUME field to the LEFT_IN register 
  * @param dev ptr to wm8731 device
  * @option WM_LEFT_IN_VOLUME_MIN -34.5dB
  * @option WM_LEFT_IN_VOLUME_0DB 0db Gain
  * @option WM_LEFT_IN_VOLUME_MAX +12dB
  * @option WM_LEFT_IN_VOLUME_STEP 1.5dB Step
  */
-#define wm_set_left_in_volume(dev) regdev_write_field(dev->mRegDev, &(dev)->mLeftIn, WM_LEFT_IN_VOLUME_MASK )
+#define wm_set_left_in_volume(dev, val) regdev_write_field(&(dev)->mRegDev, &(dev)->mLeftIn, WM_LEFT_IN_VOLUME_FIELD_MASK , (val) )
 
 /**
- * @brief writes the VOLUME field from the device 
+ * @brief writes the VOLUME field to the RIGHT_IN register 
  * @param dev ptr to wm8731 device
  * @option WM_RIGHT_IN_VOLUME_MIN minimum -34.5dB
  * @option WM_RIGHT_IN_VOLUME_0DB 0db Gain
  * @option WM_RIGHT_IN_VOLUME_MAX maximum +12dB
  * @option WM_RIGHT_IN_VOLUME_STEP 1.5dB Step
  */
-#define wm_set_right_in_volume(dev) regdev_write_field(dev->mRegDev, &(dev)->mRightIn, WM_RIGHT_IN_VOLUME_MASK )
+#define wm_set_right_in_volume(dev, val) regdev_write_field(&(dev)->mRegDev, &(dev)->mRightIn, WM_RIGHT_IN_VOLUME_FIELD_MASK , (val) )
 
 /**
- * @brief writes the SIDEATT field from the device 
+ * @brief writes the SIDEATT field to the AN_PATH register 
  * @param dev ptr to wm8731 device
  * @option WM_AN_PATH_SIDEATT_6DB 6dB of attenuation
  * @option WM_AN_PATH_SIDEATT_9DB 9dB of attenuation
  * @option WM_AN_PATH_SIDEATT_12DB 12dB of attenuation
  * @option WM_AN_PATH_SIDEATT_15DB 15dB of attenuation
  */
-#define wm_set_an_path_sideatt(dev) regdev_write_field(dev->mRegDev, &(dev)->mAnPath, WM_AN_PATH_SIDEATT_MASK )
+#define wm_set_an_path_sideatt(dev, val) regdev_write_field(&(dev)->mRegDev, &(dev)->mAnPath, WM_AN_PATH_SIDEATT_FIELD_MASK , (val) )
 
 /**
- * @brief writes the DEEMP field from the device 
+ * @brief writes the DEEMP field to the DIG_PATH register 
  * @param dev ptr to wm8731 device
  * @option WM_DIG_PATH_DEEMP_DIS Disable
  * @option WM_DIG_PATH_DEEMP_32KHZ 32 kHz
  * @option WM_DIG_PATH_DEEMP_44_1KHZ 44.1 kHz
  * @option WM_DIG_PATH_DEEMP_48KHZ 48 kHz
  */
-#define wm_set_dig_path_deemp(dev) regdev_write_field(dev->mRegDev, &(dev)->mDigPath, WM_DIG_PATH_DEEMP_MASK )
+#define wm_set_dig_path_deemp(dev, val) regdev_write_field(&(dev)->mRegDev, &(dev)->mDigPath, WM_DIG_PATH_DEEMP_FIELD_MASK , (val) )
 
 /**
- * @brief writes the IWL field from the device 
+ * @brief writes the IWL field to the DIG_IFACE register 
  * @param dev ptr to wm8731 device
  * @option WM_DIG_IFACE_IWL_32BIT 32 bit sample size
  * @option WM_DIG_IFACE_IWL_24BIT 24 bit sample size
  * @option WM_DIG_IFACE_IWL_20BIT 20 bit sample size
  * @option WM_DIG_IFACE_IWL_16BIT 16 bit sample size
  */
-#define wm_set_dig_iface_iwl(dev) regdev_write_field(dev->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_IWL_MASK )
+#define wm_set_dig_iface_iwl(dev, val) regdev_write_field(&(dev)->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_IWL_FIELD_MASK , (val) )
 
 /**
- * @brief writes the FORMAT field from the device 
+ * @brief writes the FORMAT field to the DIG_IFACE register 
  * @param dev ptr to wm8731 device
  * @option WM_DIG_IFACE_FORMAT_RIGHT_JUST MSB-First right justified
  * @option WM_DIG_IFACE_FORMAT_LEFT_JUST MSB-first left justified
  * @option WM_DIG_IFACE_FORMAT_I2S I2S format. MSB-First left -1 justified
  * @option WM_DIG_IFACE_FORMAT_DSP DSP Mode. frame sync + 2 data packed words
  */
-#define wm_set_dig_iface_format(dev) regdev_write_field(dev->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_FORMAT_MASK )
+#define wm_set_dig_iface_format(dev, val) regdev_write_field(&(dev)->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_FORMAT_FIELD_MASK , (val) )
 
 /**
- * @brief writes the RESET field from the device 
+ * @brief writes the RESET field to the RESET register 
  * @param dev ptr to wm8731 device
  */
-#define wm_set_reset_reset(dev) regdev_write_field(dev->mRegDev, &(dev)->mReset, WM_RESET_RESET_MASK )
+#define wm_set_reset_reset(dev, val) regdev_write_field(&(dev)->mRegDev, &(dev)->mReset, WM_RESET_RESET_FIELD_MASK , (val) )
 
 
 /*******************************************************************************
@@ -324,9 +324,10 @@
  * @param dev ptr to wm8731 device
  */
 #define WM_LOAD_CONFIG_16BIT_LINE_IN(dev) \
-wm_write_reg( (dev), &(dev)->mReset, 0x0000);    /* RESET: 0 , delay: 100 */      \
-wm_write_reg( (dev), &(dev)->mLeftIn, 0x0016);   /* MUTE: False , LRINBOTH: False , VOLUME: 0dB */ \
-wm_write_reg( (dev), &(dev)->mRightIn, 0x0016);  /* MUTE: False , LRINBOTH: False , VOLUME: 0dB */ \
+wm_write_reg( (dev), &(dev)->mReset, 0x0000);    /* RESET: 0 */                   \
+MRT_DELAY_MS(100);                               /* Delay for RESET */ \
+wm_write_reg( (dev), &(dev)->mLeftIn, 0x001F);   /* MUTE: False , LRINBOTH: False , VOLUME: 0dB */ \
+wm_write_reg( (dev), &(dev)->mRightIn, 0x0015);  /* MUTE: False , LRINBOTH: False , VOLUME: 0dB */ \
 wm_write_reg( (dev), &(dev)->mDigPath, 0x0001);  /* ADCHPD: True */               \
 wm_write_reg( (dev), &(dev)->mPowerDwn, 0x001A); /* MICPD: True , DACPD: True , OUTPD: True */ \
 wm_write_reg( (dev), &(dev)->mDigIface, 0x0002); /* IWL: 16BIT , FORMAT: I2S */   \

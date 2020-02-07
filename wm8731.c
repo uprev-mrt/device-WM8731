@@ -57,10 +57,33 @@ mrt_status_t wm_test(wm8731_t* dev)
 {
     /*user-block-test-start*/
 
+    
+    /*  Device does not have an ID/ WHO_AM_I register
+     *  So we check to see if the digital interface matches the default. 
+     */
+
+    if(wm_read_reg(dev, &dev->mDigIface) == WM_DIG_IFACE_DEFAULT)
+    {
+        return MRT_STATUS_OK;
+    }
+
     /*user-block-test-end*/
     return MRT_STATUS_ERROR;
 }
 
 
 /*user-block-bottom-start*/
+
+void wm_set_volume(wm8731_t* dev, uint8_t left, uint8_t right)
+{
+    /*Converted values for register*/
+    uint8_t leftVal = (left * 100) / WM_LEFT_IN_VOLUME_MAX;    
+    uint8_t rightVal = (right * 100)/ WM_RIGHT_IN_VOLUME_MAX;
+
+    /* Set volume fields */
+    wm_set_left_in_volume(dev, leftVal);
+    wm_set_right_in_volume(dev, rightVal); 
+}
+
+
 /*user-block-bottom-end*/

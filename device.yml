@@ -16,17 +16,17 @@ i2c_addr: 0x00
 ###########################################################################################################
 
 registers:
-  - LEFT_IN:        { addr: 0x00 , type: uint16_t, default: 0x097, desc: Left line in control}                
-  - RIGHT_IN:       { addr: 0x01 , type: uint16_t, default: 0x097, desc: Right line in control}
-  - LEFT_OUT:       { addr: 0x02 , type: uint16_t, default: 0x079, desc: Left Headphone Out control}
-  - RIGHT_OUT:      { addr: 0x03 , type: uint16_t, default: 0x079, desc: Right Headphone Out control}
-  - AN_PATH:        { addr: 0x04 , type: uint16_t, default: 0x00A, desc: Analogue audio path control}
-  - DIG_PATH:       { addr: 0x05 , type: uint16_t, default: 0x008, desc: Digital audio path control}
-  - POWER_DWN:      { addr: 0x06 , type: uint16_t, default: 0x09F, desc: Power Down control}
-  - DIG_IFACE:      { addr: 0x07 , type: uint16_t, default: 0x09F, desc: Digital audio interface format}
-  - SAMPLE:         { addr: 0x08 , type: uint16_t, default: 0x000, desc: Sampling control}
-  - ACTIVE:         { addr: 0x09 , type: uint16_t, default: 0x000, desc: Active Control}
-  - RESET:          { addr: 0x0F , type: uint16_t, default: 0xFFFF, desc: Reset control}
+  - LEFT_IN:        { addr: 0x00 , type: uint16_t, default: 0x097, perm: RW, desc: Left line in control}                
+  - RIGHT_IN:       { addr: 0x01 , type: uint16_t, default: 0x097, perm: RW, desc: Right line in control}
+  - LEFT_OUT:       { addr: 0x02 , type: uint16_t, default: 0x079, perm: RW, desc: Left Headphone Out control}
+  - RIGHT_OUT:      { addr: 0x03 , type: uint16_t, default: 0x079, perm: RW, desc: Right Headphone Out control}
+  - AN_PATH:        { addr: 0x04 , type: uint16_t, default: 0x00A, perm: RW, desc: Analogue audio path control}
+  - DIG_PATH:       { addr: 0x05 , type: uint16_t, default: 0x008, perm: RW, desc: Digital audio path control}
+  - POWER_DWN:      { addr: 0x06 , type: uint16_t, default: 0x09F, perm: RW, desc: Power Down control}
+  - DIG_IFACE:      { addr: 0x07 , type: uint16_t, default: 0x09F, perm: RW, desc: Digital audio interface format}
+  - SAMPLE:         { addr: 0x08 , type: uint16_t, default: 0x000, perm: RW, desc: Sampling control}
+  - ACTIVE:         { addr: 0x09 , type: uint16_t, default: 0x000, perm: RW, desc: Active Control}
+  - RESET:          { addr: 0x0F , type: uint16_t, default: 0xfff, perm: RW, desc: Reset control}
 
 
 ###########################################################################################################
@@ -41,8 +41,8 @@ fields:
         desc: Volume control for Left input in 1.5dB steps range -34.5dB -> +12dB
         values:
           - MIN: { val: 0, desc: -34.5dB}
-          - 0dB: {val: 22, desc: 0db Gain}
-          - MAX: {val: 32, desc: +12dB}
+          - 0dB: {val: 31, desc: 0db Gain}
+          - MAX: {val: 31, desc: +12dB}
           - STEP: { val: 1, desc: 1.5dB Step}
 
 
@@ -54,8 +54,8 @@ fields:
         desc: Volume control for right input in 1.5dB steps range -34.5dB -> +12dB
         values:
           - MIN: { val: 0, desc: minimum -34.5dB}
-          - 0dB: {val: 22, desc: 0db Gain}
-          - MAX: {val: 32, desc: maximum +12dB}
+          - 0dB: {val: 21, desc: 0db Gain}
+          - MAX: {val: 31, desc: maximum +12dB}
           - STEP: { val: 1, desc: 1.5dB Step}
   
   - AN_PATH:
@@ -134,6 +134,10 @@ fields:
 
   - ACTIVE:
     - Enable: {bit: 0, desc: Enables Digital Audio interface}
+
+###########################################################################################################
+#                                   PRESET CONFIGS                                                        #
+###########################################################################################################
 
 configs:
   - 16bit_line_in:

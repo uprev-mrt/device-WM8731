@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>wm8731 Device</title>
-</head>
-<body>
-<div class="content">
+
 <h1>wm8731 Device</h1>
 <ul>
   <li> Generated with <a href="https://github.com/uprev-mrt/mrtutils/wiki/mrt-device">MrT Device Utility</a> </li>
   <li> Bus:  I2C</li>
+  <li> RegMap: <a href="Regmap.html">Register Map</a>
   <li>Datasheet: <a href="https://statics.cirrus.com/pubs/proDatasheet/WM8731_v4.9.pdf">https://statics.cirrus.c...</a> </li>
   <li> DigiKey: <a href="https://www.digikey.com/products/en?KeyWords=WM8731CSEFL-ND">WM8731CSEFL-ND</a></li>
   <li> I2C Address: 0x00</li>
@@ -16,6 +11,9 @@
 <hr/>
 <h2>Description: </h2>
 <p>Aduio codec</p>
+
+<!--*user-block-description-start*-->
+<!--*user-block-description-end*-->
 
 <br/>
 
@@ -118,7 +116,7 @@
         <td>0x0F</td>
         <td>uint16_t</td>
         <td>RW</td>
-        <td>0xFFFF</td>
+        <td>0x0FFF</td>
         <td>Reset control</td>
     </tr>
 
@@ -141,6 +139,8 @@
 </ul>
 
 <p>Left line in control</p>
+<!--*user-block-left_in-start*-->
+<!--*user-block-left_in-end*-->
 
 
 <table class="fields" width="80%">
@@ -165,7 +165,12 @@
   </tr>
   <tr>
     <th class="smallCell">Field</th>
-   
+   <td class="empty" colspan="7"></td>
+<td class="field" colspan="1">LRINBOTH</td>
+<td class="field" colspan="1">MUTE</td>
+<td class="empty" colspan="2"></td>
+<td class="field" colspan="5">VOLUME</td>
+
   </tr>
   <tr>
     <th class="smallCell">Default</th>
@@ -187,6 +192,23 @@
       <td class="one" >1</td>
    </tr>
 </table>
+
+<h2> Flags:</h2>
+<b>MUTE:</b> Mutes Left input<br>
+<b>LRINBOTH:</b> Left to Right Channel Line Input Volume and Mute Data Load Control<br>
+
+<h2> Fields:</h2>
+
+<b>VOLUME:</b> Volume control for Left input in 1.5dB steps range -34.5dB -> +12dB
+<table>
+<tr><td> MIN </td><td> b00000 </td><td>  -34.5dB</td></tr>
+<tr><td> 0dB </td><td> b11111 </td><td>  0db Gain</td></tr>
+<tr><td> MAX </td><td> b11111 </td><td>  +12dB</td></tr>
+<tr><td> STEP </td><td> b00001 </td><td>  1.5dB Step</td></tr>
+</table>
+
+
+
 <div id="register_right_in_detail" class="packet">
 <h2>RIGHT_IN </h2>
 <hr/>
@@ -196,6 +218,8 @@
 </ul>
 
 <p>Right line in control</p>
+<!--*user-block-right_in-start*-->
+<!--*user-block-right_in-end*-->
 
 
 <table class="fields" width="80%">
@@ -220,7 +244,12 @@
   </tr>
   <tr>
     <th class="smallCell">Field</th>
-   
+   <td class="empty" colspan="7"></td>
+<td class="field" colspan="1">LRINBOTH</td>
+<td class="field" colspan="1">MUTE</td>
+<td class="empty" colspan="2"></td>
+<td class="field" colspan="5">VOLUME</td>
+
   </tr>
   <tr>
     <th class="smallCell">Default</th>
@@ -242,6 +271,23 @@
       <td class="one" >1</td>
    </tr>
 </table>
+
+<h2> Flags:</h2>
+<b>MUTE:</b> Mutes Right input<br>
+<b>LRINBOTH:</b> Left to Right Channel Line Input Volume and Mute Data Load Control<br>
+
+<h2> Fields:</h2>
+
+<b>VOLUME:</b> Volume control for right input in 1.5dB steps range -34.5dB -> +12dB
+<table>
+<tr><td> MIN </td><td> b00000 </td><td>  minimum -34.5dB</td></tr>
+<tr><td> 0dB </td><td> b10101 </td><td>  0db Gain</td></tr>
+<tr><td> MAX </td><td> b11111 </td><td>  maximum +12dB</td></tr>
+<tr><td> STEP </td><td> b00001 </td><td>  1.5dB Step</td></tr>
+</table>
+
+
+
 <div id="register_left_out_detail" class="packet">
 <h2>LEFT_OUT </h2>
 <hr/>
@@ -251,6 +297,8 @@
 </ul>
 
 <p>Left Headphone Out control</p>
+<!--*user-block-left_out-start*-->
+<!--*user-block-left_out-end*-->
 
 
 <table class="fields" width="80%">
@@ -275,7 +323,8 @@
   </tr>
   <tr>
     <th class="smallCell">Field</th>
-   
+   <td class="empty" colspan="16"></td>
+
   </tr>
   <tr>
     <th class="smallCell">Default</th>
@@ -297,6 +346,9 @@
       <td class="one" >1</td>
    </tr>
 </table>
+
+
+
 <div id="register_right_out_detail" class="packet">
 <h2>RIGHT_OUT </h2>
 <hr/>
@@ -306,6 +358,8 @@
 </ul>
 
 <p>Right Headphone Out control</p>
+<!--*user-block-right_out-start*-->
+<!--*user-block-right_out-end*-->
 
 
 <table class="fields" width="80%">
@@ -330,7 +384,8 @@
   </tr>
   <tr>
     <th class="smallCell">Field</th>
-   
+   <td class="empty" colspan="16"></td>
+
   </tr>
   <tr>
     <th class="smallCell">Default</th>
@@ -352,6 +407,9 @@
       <td class="one" >1</td>
    </tr>
 </table>
+
+
+
 <div id="register_an_path_detail" class="packet">
 <h2>AN_PATH </h2>
 <hr/>
@@ -361,6 +419,8 @@
 </ul>
 
 <p>Analogue audio path control</p>
+<!--*user-block-an_path-start*-->
+<!--*user-block-an_path-end*-->
 
 
 <table class="fields" width="80%">
@@ -385,7 +445,15 @@
   </tr>
   <tr>
     <th class="smallCell">Field</th>
-   
+   <td class="empty" colspan="8"></td>
+<td class="field" colspan="2">SIDEATT</td>
+<td class="field" colspan="1">SIDETONE</td>
+<td class="field" colspan="1">DACSEL</td>
+<td class="field" colspan="1">BYPASS</td>
+<td class="field" colspan="1">INSEL</td>
+<td class="field" colspan="1">MUTEMIC</td>
+<td class="field" colspan="1">MICBOOST</td>
+
   </tr>
   <tr>
     <th class="smallCell">Default</th>
@@ -407,6 +475,27 @@
       <td class="zero" >0</td>
    </tr>
 </table>
+
+<h2> Flags:</h2>
+<b>MICBOOST:</b> Microphone Input Level Boost<br>
+<b>MUTEMIC:</b> Mute Mic input to ADC<br>
+<b>INSEL:</b> Selects input between Mic and Line-in<br>
+<b>BYPASS:</b> Combines Line-in signal to Output<br>
+<b>DACSEL:</b> DAC Select<br>
+<b>SIDETONE:</b> Combines Mic signal to Output<br>
+
+<h2> Fields:</h2>
+
+<b>SIDEATT:</b> Side Tone attenuation
+<table>
+<tr><td> 6dB </td><td> b00 </td><td>  6dB of attenuation</td></tr>
+<tr><td> 9dB </td><td> b01 </td><td>  9dB of attenuation</td></tr>
+<tr><td> 12dB </td><td> b10 </td><td>  12dB of attenuation</td></tr>
+<tr><td> 15dB </td><td> b11 </td><td>  15dB of attenuation</td></tr>
+</table>
+
+
+
 <div id="register_dig_path_detail" class="packet">
 <h2>DIG_PATH </h2>
 <hr/>
@@ -416,6 +505,8 @@
 </ul>
 
 <p>Digital audio path control</p>
+<!--*user-block-dig_path-start*-->
+<!--*user-block-dig_path-end*-->
 
 
 <table class="fields" width="80%">
@@ -440,7 +531,12 @@
   </tr>
   <tr>
     <th class="smallCell">Field</th>
-   
+   <td class="empty" colspan="11"></td>
+<td class="field" colspan="1">HPOR</td>
+<td class="field" colspan="1">DACMU</td>
+<td class="field" colspan="2">DEEMP</td>
+<td class="field" colspan="1">ADCHPD</td>
+
   </tr>
   <tr>
     <th class="smallCell">Default</th>
@@ -462,6 +558,24 @@
       <td class="zero" >0</td>
    </tr>
 </table>
+
+<h2> Flags:</h2>
+<b>ADCHPD:</b> ADC High Pass Filter<br>
+<b>DACMU:</b> DAC Soft Mute<br>
+<b>HPOR:</b> Store dc offset when High Pass Filter disabled<br>
+
+<h2> Fields:</h2>
+
+<b>DEEMP:</b> De-emphasis Control
+<table>
+<tr><td> DIS </td><td> b00 </td><td>  Disable</td></tr>
+<tr><td> 32kHz </td><td> b01 </td><td>  32 kHz</td></tr>
+<tr><td> 44_1kHz </td><td> b10 </td><td>  44.1 kHz</td></tr>
+<tr><td> 48kHz </td><td> b11 </td><td>  48 kHz</td></tr>
+</table>
+
+
+
 <div id="register_power_dwn_detail" class="packet">
 <h2>POWER_DWN </h2>
 <hr/>
@@ -471,6 +585,8 @@
 </ul>
 
 <p>Power Down control</p>
+<!--*user-block-power_dwn-start*-->
+<!--*user-block-power_dwn-end*-->
 
 
 <table class="fields" width="80%">
@@ -495,7 +611,16 @@
   </tr>
   <tr>
     <th class="smallCell">Field</th>
-   
+   <td class="empty" colspan="8"></td>
+<td class="field" colspan="1">POWEROFF</td>
+<td class="field" colspan="1">CLKOUTPD</td>
+<td class="field" colspan="1">OSCPD</td>
+<td class="field" colspan="1">OUTPD</td>
+<td class="field" colspan="1">DACPD</td>
+<td class="field" colspan="1">ADCPD</td>
+<td class="field" colspan="1">MICPD</td>
+<td class="field" colspan="1">LINEINPD</td>
+
   </tr>
   <tr>
     <th class="smallCell">Default</th>
@@ -517,6 +642,18 @@
       <td class="one" >1</td>
    </tr>
 </table>
+
+<h2> Flags:</h2>
+<b>LINEINPD:</b> Line Input Power Down<br>
+<b>MICPD:</b> Microphone Input an Bias PowerDown<br>
+<b>ADCPD:</b> ADC Power Dow<br>
+<b>DACPD:</b> DAC Power Down<br>
+<b>OUTPD:</b> Outputs Power Down<br>
+<b>OSCPD:</b> Oscillator Power Down<br>
+<b>CLKOUTPD:</b> CLKOUT power down<br>
+<b>POWEROFF:</b> POWEROFF mode<br>
+
+
 <div id="register_dig_iface_detail" class="packet">
 <h2>DIG_IFACE </h2>
 <hr/>
@@ -526,6 +663,8 @@
 </ul>
 
 <p>Digital audio interface format</p>
+<!--*user-block-dig_iface-start*-->
+<!--*user-block-dig_iface-end*-->
 
 
 <table class="fields" width="80%">
@@ -550,7 +689,14 @@
   </tr>
   <tr>
     <th class="smallCell">Field</th>
-   
+   <td class="empty" colspan="8"></td>
+<td class="field" colspan="1">BLCKINV</td>
+<td class="field" colspan="1">MASTER_MODE</td>
+<td class="field" colspan="1">LRSWAP</td>
+<td class="field" colspan="1">LRP</td>
+<td class="field" colspan="2">IWL</td>
+<td class="field" colspan="2">FORMAT</td>
+
   </tr>
   <tr>
     <th class="smallCell">Default</th>
@@ -572,6 +718,35 @@
       <td class="one" >1</td>
    </tr>
 </table>
+
+<h2> Flags:</h2>
+<b>BLCKINV:</b> Inverts the bit clock<br>
+<b>MASTER_MODE:</b> Enables Master mode<br>
+<b>LRSWAP:</b> Swaps LR clock polarity<br>
+<b>LRP:</b> DACLRC phase control (in left, right or I2S modes)<br>
+
+<h2> Fields:</h2>
+
+<b>IWL:</b> Word Length. Audio data size
+<table>
+<tr><td> 32BIT </td><td> b11 </td><td>  32 bit sample size</td></tr>
+<tr><td> 24BIT </td><td> b10 </td><td>  24 bit sample size</td></tr>
+<tr><td> 20BIT </td><td> b01 </td><td>  20 bit sample size</td></tr>
+<tr><td> 16BIT </td><td> b00 </td><td>  16 bit sample size</td></tr>
+</table>
+
+
+
+<b>FORMAT:</b> Selects digital audio format
+<table>
+<tr><td> RIGHT_JUST </td><td> b00 </td><td>  MSB-First right justified</td></tr>
+<tr><td> LEFT_JUST </td><td> b01 </td><td>  MSB-first left justified</td></tr>
+<tr><td> I2S </td><td> b10 </td><td>  I2S format. MSB-First left -1 justified</td></tr>
+<tr><td> DSP </td><td> b11 </td><td>  DSP Mode. frame sync + 2 data packed words</td></tr>
+</table>
+
+
+
 <div id="register_sample_detail" class="packet">
 <h2>SAMPLE </h2>
 <hr/>
@@ -581,6 +756,8 @@
 </ul>
 
 <p>Sampling control</p>
+<!--*user-block-sample-start*-->
+<!--*user-block-sample-end*-->
 
 
 <table class="fields" width="80%">
@@ -605,7 +782,8 @@
   </tr>
   <tr>
     <th class="smallCell">Field</th>
-   
+   <td class="empty" colspan="16"></td>
+
   </tr>
   <tr>
     <th class="smallCell">Default</th>
@@ -627,6 +805,9 @@
       <td class="zero" >0</td>
    </tr>
 </table>
+
+
+
 <div id="register_active_detail" class="packet">
 <h2>ACTIVE </h2>
 <hr/>
@@ -636,6 +817,8 @@
 </ul>
 
 <p>Active Control</p>
+<!--*user-block-active-start*-->
+<!--*user-block-active-end*-->
 
 
 <table class="fields" width="80%">
@@ -660,7 +843,9 @@
   </tr>
   <tr>
     <th class="smallCell">Field</th>
-   
+   <td class="empty" colspan="15"></td>
+<td class="field" colspan="1">Enable</td>
+
   </tr>
   <tr>
     <th class="smallCell">Default</th>
@@ -682,15 +867,22 @@
       <td class="zero" >0</td>
    </tr>
 </table>
+
+<h2> Flags:</h2>
+<b>Enable:</b> Enables Digital Audio interface<br>
+
+
 <div id="register_reset_detail" class="packet">
 <h2>RESET </h2>
 <hr/>
 <ul>
     <li class="note">  Address: <b>[0x0F]</b></li>
-    <li class="note">  Default: <b>[0xFFFF]</b></li>
+    <li class="note">  Default: <b>[0x0FFF]</b></li>
 </ul>
 
 <p>Reset control</p>
+<!--*user-block-reset-start*-->
+<!--*user-block-reset-end*-->
 
 
 <table class="fields" width="80%">
@@ -715,14 +907,16 @@
   </tr>
   <tr>
     <th class="smallCell">Field</th>
-   
+   <td class="empty" colspan="8"></td>
+<td class="field" colspan="8">RESET</td>
+
   </tr>
   <tr>
     <th class="smallCell">Default</th>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
-      <td class="one" >1</td>
+      <td class="zero" >0</td>
+      <td class="zero" >0</td>
+      <td class="zero" >0</td>
+      <td class="zero" >0</td>
       <td class="one" >1</td>
       <td class="one" >1</td>
       <td class="one" >1</td>
@@ -738,178 +932,8 @@
    </tr>
 </table>
 
-</div>
-</body>
-<style>
-table.fixed { table-layout:auto; }
-table.fixed td { overflow:visible; }
 
-table.fields{
-  table-layout:auto;
-}
+<h2> Fields:</h2>
 
-body {
-  padding:0;
-}
+<b>RESET:</b> Setting to 0 resets the device
 
-.content{
-  padding-top: 0;
-  padding-left: 1%;
-  padding-right: 1%;
-  background-color: #fff;
-}
-
-@media print {
-  .packet {
-    page-break-inside: avoid;
-    padding-top: 4px;
-  }
-  .content{
-    width: 100%;
-  }
-  body{
-    background-color: #fff;
-  }
-}
-
-@media screen {
-  .content{
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0;
-    padding-top: 4px;
-    box-shadow: 5px 10px #AAA;
-  }
-
-  body{
-    background-color: #ccc;
-    padding: 0;
-  }
-}
-
-html *{
-  font-size: 1em ;
-   color: #000 ;
-  font-family: Arial ;
-}
-
-hr.section {
-  border-style: solid;
-  border-width: 2px;
-  opacity: 1;
-}
-
-
-hr.thick {
-  border-style: solid;
-  border-width: 1px;
-  border-color: #94b2d3;
-  opacity: 1;
-}
-
-hr {
-  opacity: 0.5;
-}
-
-table {
-  border-collapse: collapse;
-}
-
-td {
-  border: 1px solid #000000;
-  text-align: left;
-  padding: 5px;
-  vertical-align: top;
-}
-
-.smallCell
-{
-    width: 1px;
-    white-space: nowrap;
-}
-
-td.zero{
-  background-color: #ce927e;
-}
-
-td.one{
-  background-color: #98cd98;
-}
-
-td.empty{
-  background-color: #cccccc;
-}
-
-td.field{
-  width: 1px;
-  white-space: nowrap;
-  text-align: center;
-}
-
-.desc{
-  font-size: 1.2em;
-}
-
-th {
-  border: 1px solid #000000;
-  text-align: left;
-  padding: 5px;
-  background-color: #94b2d3;
-}
-
-li.val{
-  opacity: 0.6;
-}
-
-h1{
-  font-size: 2.0em;
-}
-
-h2 
-{
-  font-size: 1.3em;
-}
-
-h2.right{
-  text-align: center;
-  font-size: 1.3em;
-}
-
-h3
-{
-  font-size: 1.8em;
-  color: #003366;
-}
-
-h4 
-{
-  font-size: 1.1em;
-  color: #003366;
-}
-
-
-.note{
-  font-style: italic;
-  opacity: 0.6;
-}
-
-a{
-  text-decoration:none;
-}
-
-a:link {
-  color: blue;
-}
-
-/* visited link */
-a:visited {
-  color: blue;
-}
-
-table.fixed tr td:last-child{
-    width:1%;
-    white-space:nowrap;
-}
-</style>
-</html>

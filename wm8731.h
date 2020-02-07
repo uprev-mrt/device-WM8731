@@ -77,6 +77,16 @@ mrt_status_t wm_test(wm8731_t* dev);
 
 
 /*user-block-bottom-start*/
+
+/**
+ * @brief sets input volume of device
+ * @param dev ptr to wm8731 device
+ * @param left volume for left side 0-100 
+ * @param right volume for right side
+ */
+void wm_set_volume(wm8731_t* dev, uint8_t left, uint8_t right);
+
+
 /*user-block-bottom-end*/
 
 #ifdef __cplusplus
