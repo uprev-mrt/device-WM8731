@@ -6,7 +6,7 @@
   * 
   */
 
-#define WM8731_I2C_ADDRESS 0x00
+#define WM8731_I2C_ADDRESS 0x34
 #define WM8731_REG_ADDR_SIZE 1
 
 
@@ -39,7 +39,7 @@
     #define WM_LEFT_IN_VOLUME_FIELD_MASK                           0x001F /* Volume control for Left input in 1.5dB steps range -34.5dB -> +12dB */
     #define WM_LEFT_IN_VOLUME_FIELD_OFFSET                         0x0000
       #define WM_LEFT_IN_VOLUME_MIN                                0x0000 /* -34.5dB */
-      #define WM_LEFT_IN_VOLUME_0DB                                0x001F /* 0db Gain */
+      #define WM_LEFT_IN_VOLUME_0DB                                0x0015 /* 0db Gain */
       #define WM_LEFT_IN_VOLUME_MAX                                0x001F /* +12dB */
       #define WM_LEFT_IN_VOLUME_STEP                               0x0001 /* 1.5dB Step */
 
@@ -90,7 +90,7 @@
     #define WM_POWER_DWN_MICPD                                     0x0002 /* Microphone Input an Bias PowerDown */
     #define WM_POWER_DWN_ADCPD                                     0x0004 /* ADC Power Dow */
     #define WM_POWER_DWN_DACPD                                     0x0008 /* DAC Power Down */
-    #define WM_POWER_DWN_OUTPD                                     0x0010 /* Outputs Power Down */
+    #define WM_POWER_DWN_OUTPD                                     0x0010 /* Powers down ALL outputs including digital */
     #define WM_POWER_DWN_OSCPD                                     0x0020 /* Oscillator Power Down */
     #define WM_POWER_DWN_CLKOUTPD                                  0x0040 /* CLKOUT power down */
     #define WM_POWER_DWN_POWEROFF                                  0x0080 /* POWEROFF mode */
@@ -176,72 +176,6 @@
   Field Getters                                                                              
 *******************************************************************************/
 
-/**
- * @brief reads the VOLUME field from the LEFT_IN register 
- * @param dev ptr to wm8731 device
- * @return WM_LEFT_IN_VOLUME_MIN -34.5dB
- * @return WM_LEFT_IN_VOLUME_0DB 0db Gain
- * @return WM_LEFT_IN_VOLUME_MAX +12dB
- * @return WM_LEFT_IN_VOLUME_STEP 1.5dB Step
- */
-#define wm_get_left_in_volume(dev) regdev_read_field(&(dev)->mRegDev, &(dev)->mLeftIn, WM_LEFT_IN_VOLUME_FIELD_MASK )
-
-/**
- * @brief reads the VOLUME field from the RIGHT_IN register 
- * @param dev ptr to wm8731 device
- * @return WM_RIGHT_IN_VOLUME_MIN minimum -34.5dB
- * @return WM_RIGHT_IN_VOLUME_0DB 0db Gain
- * @return WM_RIGHT_IN_VOLUME_MAX maximum +12dB
- * @return WM_RIGHT_IN_VOLUME_STEP 1.5dB Step
- */
-#define wm_get_right_in_volume(dev) regdev_read_field(&(dev)->mRegDev, &(dev)->mRightIn, WM_RIGHT_IN_VOLUME_FIELD_MASK )
-
-/**
- * @brief reads the SIDEATT field from the AN_PATH register 
- * @param dev ptr to wm8731 device
- * @return WM_AN_PATH_SIDEATT_6DB 6dB of attenuation
- * @return WM_AN_PATH_SIDEATT_9DB 9dB of attenuation
- * @return WM_AN_PATH_SIDEATT_12DB 12dB of attenuation
- * @return WM_AN_PATH_SIDEATT_15DB 15dB of attenuation
- */
-#define wm_get_an_path_sideatt(dev) regdev_read_field(&(dev)->mRegDev, &(dev)->mAnPath, WM_AN_PATH_SIDEATT_FIELD_MASK )
-
-/**
- * @brief reads the DEEMP field from the DIG_PATH register 
- * @param dev ptr to wm8731 device
- * @return WM_DIG_PATH_DEEMP_DIS Disable
- * @return WM_DIG_PATH_DEEMP_32KHZ 32 kHz
- * @return WM_DIG_PATH_DEEMP_44_1KHZ 44.1 kHz
- * @return WM_DIG_PATH_DEEMP_48KHZ 48 kHz
- */
-#define wm_get_dig_path_deemp(dev) regdev_read_field(&(dev)->mRegDev, &(dev)->mDigPath, WM_DIG_PATH_DEEMP_FIELD_MASK )
-
-/**
- * @brief reads the IWL field from the DIG_IFACE register 
- * @param dev ptr to wm8731 device
- * @return WM_DIG_IFACE_IWL_32BIT 32 bit sample size
- * @return WM_DIG_IFACE_IWL_24BIT 24 bit sample size
- * @return WM_DIG_IFACE_IWL_20BIT 20 bit sample size
- * @return WM_DIG_IFACE_IWL_16BIT 16 bit sample size
- */
-#define wm_get_dig_iface_iwl(dev) regdev_read_field(&(dev)->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_IWL_FIELD_MASK )
-
-/**
- * @brief reads the FORMAT field from the DIG_IFACE register 
- * @param dev ptr to wm8731 device
- * @return WM_DIG_IFACE_FORMAT_RIGHT_JUST MSB-First right justified
- * @return WM_DIG_IFACE_FORMAT_LEFT_JUST MSB-first left justified
- * @return WM_DIG_IFACE_FORMAT_I2S I2S format. MSB-First left -1 justified
- * @return WM_DIG_IFACE_FORMAT_DSP DSP Mode. frame sync + 2 data packed words
- */
-#define wm_get_dig_iface_format(dev) regdev_read_field(&(dev)->mRegDev, &(dev)->mDigIface, WM_DIG_IFACE_FORMAT_FIELD_MASK )
-
-/**
- * @brief reads the RESET field from the RESET register 
- * @param dev ptr to wm8731 device
- */
-#define wm_get_reset_reset(dev) regdev_read_field(&(dev)->mRegDev, &(dev)->mReset, WM_RESET_RESET_FIELD_MASK )
-
 
 
 /*******************************************************************************
@@ -326,10 +260,11 @@
 #define WM_LOAD_CONFIG_16BIT_LINE_IN(dev) \
 wm_write_reg( (dev), &(dev)->mReset, 0x0000);    /* RESET: 0 */                   \
 MRT_DELAY_MS(100);                               /* Delay for RESET */ \
-wm_write_reg( (dev), &(dev)->mLeftIn, 0x001F);   /* MUTE: False , LRINBOTH: False , VOLUME: 0dB */ \
+wm_write_reg( (dev), &(dev)->mLeftIn, 0x0015);   /* MUTE: False , LRINBOTH: False , VOLUME: 0dB */ \
 wm_write_reg( (dev), &(dev)->mRightIn, 0x0015);  /* MUTE: False , LRINBOTH: False , VOLUME: 0dB */ \
-wm_write_reg( (dev), &(dev)->mDigPath, 0x0001);  /* ADCHPD: True */               \
-wm_write_reg( (dev), &(dev)->mPowerDwn, 0x001A); /* MICPD: True , DACPD: True , OUTPD: True */ \
+wm_write_reg( (dev), &(dev)->mDigPath, 0x0000);  /* ADCHPD: False */              \
+wm_write_reg( (dev), &(dev)->mAnPath, 0x000A);   /* BYPASS: True , INSEL: LINE , MUTEMIC: True */ \
+wm_write_reg( (dev), &(dev)->mPowerDwn, 0x000A); /* MICPD: True , DACPD: True , OUTPD: False */ \
 wm_write_reg( (dev), &(dev)->mDigIface, 0x0002); /* IWL: 16BIT , FORMAT: I2S */   \
 wm_write_reg( (dev), &(dev)->mActive, 0x0001);   /* Enable: True */               \
 

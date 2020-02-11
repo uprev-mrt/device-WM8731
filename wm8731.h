@@ -86,6 +86,15 @@ mrt_status_t wm_test(wm8731_t* dev);
  */
 void wm_set_volume(wm8731_t* dev, uint8_t left, uint8_t right);
 
+/**
+ * @brief custom register write function fo wm8731 device because it uses a weird adressing scheme
+ * @param dev ptr to regdev_t device
+ * @param addr address of register to write
+ * @param data ptr to data to write
+ * @param len len of data to write
+ * @return MRT_STATUS_OK if the write is successful
+ */
+mrt_status_t wm8731_write_i2c(mrt_regdev_t* dev, uint32_t addr, uint8_t* data,int len); 
 
 /*user-block-bottom-end*/
 
