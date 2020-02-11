@@ -6,7 +6,7 @@
   <li> RegMap: <a href="Regmap.html">Register Map</a>
   <li>Datasheet: <a href="https://statics.cirrus.com/pubs/proDatasheet/WM8731_v4.9.pdf">https://statics.cirrus.c...</a> </li>
   <li> DigiKey: <a href="https://www.digikey.com/products/en?KeyWords=WM8731CSEFL-ND">WM8731CSEFL-ND</a></li>
-  <li> I2C Address: 0x00</li>
+  <li> I2C Address: 0x34</li>
 </ul>
 <hr/>
 <h2>Description: </h2>
@@ -14,7 +14,6 @@
 
 <!--*user-block-description-start*-->
 <!--*user-block-description-end*-->
-
 <br/>
 
 
@@ -35,7 +34,7 @@
         <td><a href="#register_left_in_detail">LEFT_IN</a></td>
         <td>0x00</td>
         <td>uint16_t</td>
-        <td>RW</td>
+        <td>W</td>
         <td>0x0097</td>
         <td>Left line in control</td>
     </tr>
@@ -43,7 +42,7 @@
         <td><a href="#register_right_in_detail">RIGHT_IN</a></td>
         <td>0x01</td>
         <td>uint16_t</td>
-        <td>RW</td>
+        <td>W</td>
         <td>0x0097</td>
         <td>Right line in control</td>
     </tr>
@@ -51,7 +50,7 @@
         <td><a href="#register_left_out_detail">LEFT_OUT</a></td>
         <td>0x02</td>
         <td>uint16_t</td>
-        <td>RW</td>
+        <td>W</td>
         <td>0x0079</td>
         <td>Left Headphone Out control</td>
     </tr>
@@ -59,7 +58,7 @@
         <td><a href="#register_right_out_detail">RIGHT_OUT</a></td>
         <td>0x03</td>
         <td>uint16_t</td>
-        <td>RW</td>
+        <td>W</td>
         <td>0x0079</td>
         <td>Right Headphone Out control</td>
     </tr>
@@ -67,7 +66,7 @@
         <td><a href="#register_an_path_detail">AN_PATH</a></td>
         <td>0x04</td>
         <td>uint16_t</td>
-        <td>RW</td>
+        <td>W</td>
         <td>0x000A</td>
         <td>Analogue audio path control</td>
     </tr>
@@ -75,7 +74,7 @@
         <td><a href="#register_dig_path_detail">DIG_PATH</a></td>
         <td>0x05</td>
         <td>uint16_t</td>
-        <td>RW</td>
+        <td>W</td>
         <td>0x0008</td>
         <td>Digital audio path control</td>
     </tr>
@@ -83,7 +82,7 @@
         <td><a href="#register_power_dwn_detail">POWER_DWN</a></td>
         <td>0x06</td>
         <td>uint16_t</td>
-        <td>RW</td>
+        <td>W</td>
         <td>0x009F</td>
         <td>Power Down control</td>
     </tr>
@@ -91,7 +90,7 @@
         <td><a href="#register_dig_iface_detail">DIG_IFACE</a></td>
         <td>0x07</td>
         <td>uint16_t</td>
-        <td>RW</td>
+        <td>W</td>
         <td>0x009F</td>
         <td>Digital audio interface format</td>
     </tr>
@@ -99,7 +98,7 @@
         <td><a href="#register_sample_detail">SAMPLE</a></td>
         <td>0x08</td>
         <td>uint16_t</td>
-        <td>RW</td>
+        <td>W</td>
         <td>0x0000</td>
         <td>Sampling control</td>
     </tr>
@@ -107,7 +106,7 @@
         <td><a href="#register_active_detail">ACTIVE</a></td>
         <td>0x09</td>
         <td>uint16_t</td>
-        <td>RW</td>
+        <td>W</td>
         <td>0x0000</td>
         <td>Active Control</td>
     </tr>
@@ -115,7 +114,7 @@
         <td><a href="#register_reset_detail">RESET</a></td>
         <td>0x0F</td>
         <td>uint16_t</td>
-        <td>RW</td>
+        <td>W</td>
         <td>0x0FFF</td>
         <td>Reset control</td>
     </tr>
@@ -141,8 +140,6 @@
 <p>Left line in control</p>
 <!--*user-block-left_in-start*-->
 <!--*user-block-left_in-end*-->
-
-
 <table class="fields" width="80%">
   <tr>
     <th class="smallCell">bit</th>
@@ -202,7 +199,7 @@
 <b>VOLUME:</b> Volume control for Left input in 1.5dB steps range -34.5dB -> +12dB
 <table>
 <tr><td> MIN </td><td> b00000 </td><td>  -34.5dB</td></tr>
-<tr><td> 0dB </td><td> b11111 </td><td>  0db Gain</td></tr>
+<tr><td> 0dB </td><td> b10101 </td><td>  0db Gain</td></tr>
 <tr><td> MAX </td><td> b11111 </td><td>  +12dB</td></tr>
 <tr><td> STEP </td><td> b00001 </td><td>  1.5dB Step</td></tr>
 </table>
@@ -220,8 +217,6 @@
 <p>Right line in control</p>
 <!--*user-block-right_in-start*-->
 <!--*user-block-right_in-end*-->
-
-
 <table class="fields" width="80%">
   <tr>
     <th class="smallCell">bit</th>
@@ -299,8 +294,6 @@
 <p>Left Headphone Out control</p>
 <!--*user-block-left_out-start*-->
 <!--*user-block-left_out-end*-->
-
-
 <table class="fields" width="80%">
   <tr>
     <th class="smallCell">bit</th>
@@ -360,8 +353,6 @@
 <p>Right Headphone Out control</p>
 <!--*user-block-right_out-start*-->
 <!--*user-block-right_out-end*-->
-
-
 <table class="fields" width="80%">
   <tr>
     <th class="smallCell">bit</th>
@@ -421,8 +412,6 @@
 <p>Analogue audio path control</p>
 <!--*user-block-an_path-start*-->
 <!--*user-block-an_path-end*-->
-
-
 <table class="fields" width="80%">
   <tr>
     <th class="smallCell">bit</th>
@@ -507,8 +496,6 @@
 <p>Digital audio path control</p>
 <!--*user-block-dig_path-start*-->
 <!--*user-block-dig_path-end*-->
-
-
 <table class="fields" width="80%">
   <tr>
     <th class="smallCell">bit</th>
@@ -587,8 +574,6 @@
 <p>Power Down control</p>
 <!--*user-block-power_dwn-start*-->
 <!--*user-block-power_dwn-end*-->
-
-
 <table class="fields" width="80%">
   <tr>
     <th class="smallCell">bit</th>
@@ -648,7 +633,7 @@
 <b>MICPD:</b> Microphone Input an Bias PowerDown<br>
 <b>ADCPD:</b> ADC Power Dow<br>
 <b>DACPD:</b> DAC Power Down<br>
-<b>OUTPD:</b> Outputs Power Down<br>
+<b>OUTPD:</b> Powers down ALL outputs including digital<br>
 <b>OSCPD:</b> Oscillator Power Down<br>
 <b>CLKOUTPD:</b> CLKOUT power down<br>
 <b>POWEROFF:</b> POWEROFF mode<br>
@@ -665,8 +650,6 @@
 <p>Digital audio interface format</p>
 <!--*user-block-dig_iface-start*-->
 <!--*user-block-dig_iface-end*-->
-
-
 <table class="fields" width="80%">
   <tr>
     <th class="smallCell">bit</th>
@@ -758,8 +741,6 @@
 <p>Sampling control</p>
 <!--*user-block-sample-start*-->
 <!--*user-block-sample-end*-->
-
-
 <table class="fields" width="80%">
   <tr>
     <th class="smallCell">bit</th>
@@ -819,8 +800,6 @@
 <p>Active Control</p>
 <!--*user-block-active-start*-->
 <!--*user-block-active-end*-->
-
-
 <table class="fields" width="80%">
   <tr>
     <th class="smallCell">bit</th>
@@ -883,8 +862,6 @@
 <p>Reset control</p>
 <!--*user-block-reset-start*-->
 <!--*user-block-reset-end*-->
-
-
 <table class="fields" width="80%">
   <tr>
     <th class="smallCell">bit</th>

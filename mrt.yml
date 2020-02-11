@@ -1,0 +1,4 @@
+---
+!include device.yml
+category: Device/Audio
+requires: [RegDevice]
