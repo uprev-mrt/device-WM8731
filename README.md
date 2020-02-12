@@ -13,6 +13,11 @@
 <p>Aduio codec</p>
 
 <!--*user-block-description-start*-->
+
+> Note: Device does not use standard I2C. See datasheet for addressing
+
+> Note: Setting Output power down flag (OUTPD) seems to shut down line inputs as well
+
 <!--*user-block-description-end*-->
 <br/>
 

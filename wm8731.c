@@ -18,22 +18,22 @@
 static mrt_status_t wm_init(wm8731_t* dev)
 {   
     /* Initialize Register Descriptors */
-    REG_INIT( dev->mLeftIn , WM_REG_LEFT_IN_ADDR , uint16_t, REG_PERM_W  );
-    REG_INIT( dev->mRightIn , WM_REG_RIGHT_IN_ADDR , uint16_t, REG_PERM_W  );
-    REG_INIT( dev->mLeftOut , WM_REG_LEFT_OUT_ADDR , uint16_t, REG_PERM_W  );
-    REG_INIT( dev->mRightOut , WM_REG_RIGHT_OUT_ADDR , uint16_t, REG_PERM_W  );
-    REG_INIT( dev->mAnPath , WM_REG_AN_PATH_ADDR , uint16_t, REG_PERM_W  );
-    REG_INIT( dev->mDigPath , WM_REG_DIG_PATH_ADDR , uint16_t, REG_PERM_W  );
-    REG_INIT( dev->mPowerDwn , WM_REG_POWER_DWN_ADDR , uint16_t, REG_PERM_W  );
-    REG_INIT( dev->mDigIface , WM_REG_DIG_IFACE_ADDR , uint16_t, REG_PERM_W  );
-    REG_INIT( dev->mSample , WM_REG_SAMPLE_ADDR , uint16_t, REG_PERM_W  );
-    REG_INIT( dev->mActive , WM_REG_ACTIVE_ADDR , uint16_t, REG_PERM_W  );
-    REG_INIT( dev->mReset , WM_REG_RESET_ADDR , uint16_t, REG_PERM_W  );
+    REG_INIT( dev->mLeftIn , WM_REG_LEFT_IN_ADDR , uint16_t, REG_PERM_W , 0x0097  );
+    REG_INIT( dev->mRightIn , WM_REG_RIGHT_IN_ADDR , uint16_t, REG_PERM_W , 0x0097  );
+    REG_INIT( dev->mLeftOut , WM_REG_LEFT_OUT_ADDR , uint16_t, REG_PERM_W , 0x0079  );
+    REG_INIT( dev->mRightOut , WM_REG_RIGHT_OUT_ADDR , uint16_t, REG_PERM_W , 0x0079  );
+    REG_INIT( dev->mAnPath , WM_REG_AN_PATH_ADDR , uint16_t, REG_PERM_W , 0x000A  );
+    REG_INIT( dev->mDigPath , WM_REG_DIG_PATH_ADDR , uint16_t, REG_PERM_W , 0x0008  );
+    REG_INIT( dev->mPowerDwn , WM_REG_POWER_DWN_ADDR , uint16_t, REG_PERM_W , 0x009F  );
+    REG_INIT( dev->mDigIface , WM_REG_DIG_IFACE_ADDR , uint16_t, REG_PERM_W , 0x009F  );
+    REG_INIT( dev->mSample , WM_REG_SAMPLE_ADDR , uint16_t, REG_PERM_W , 0x0000  );
+    REG_INIT( dev->mActive , WM_REG_ACTIVE_ADDR , uint16_t, REG_PERM_W , 0x0000  );
+    REG_INIT( dev->mReset , WM_REG_RESET_ADDR , uint16_t, REG_PERM_W , 0x0FFF  );
 
 
     /*user-block-init-start*/
 
-    /* Assing the custom write function to the RegDev base */
+    /* Assign the custom write function to the RegDev because device does not us standard I2C register access */
     dev->mRegDev.fWrite = wm8731_write_i2c;
 
     /*user-block-init-end*/
@@ -61,7 +61,8 @@ mrt_status_t wm_test(wm8731_t* dev)
 {
     /*user-block-test-start*/
 
-    /* Device is Write only. 
+    /* No default test because device is write-only */
+    return MRT_STATUS_ERROR;    //Return error so nobody relies on this test
 
     /*user-block-test-end*/
     return MRT_STATUS_ERROR;
