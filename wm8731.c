@@ -54,7 +54,7 @@ mrt_status_t wm_init_i2c(wm8731_t* dev, mrt_i2c_handle_t i2c)
     /*user-block-init-i2c-start*/
     /*user-block-init-i2c-end*/
     
-    return MRT_STATUS_OK;
+    return status;
 }
 
 mrt_status_t wm_test(wm8731_t* dev)
@@ -85,9 +85,8 @@ void wm_set_volume(wm8731_t* dev, uint8_t left, uint8_t right)
 
 mrt_status_t wm8731_write_i2c(mrt_regdev_t* dev, uint32_t addr, uint8_t* data,int len)
 {
-    /* wm8731 actually writes a single 16bit value with a 7bit register address and a 9 bit register value.. */
-    uint16_t regVal = (addr<< 9) | *data;
-    addr = (addr << 1) | (*data >> 8);
+    /* wm8731 treats registers as 9 bits of data with a 7bit address. so we shift the LSB of the second byte into the address.. */
+    addr = (addr << 1) | (data[1] & 0xFE);
     
     /* Once we have shifted the 9th data bit into the address, we can write the remainder as a single byte*/
     return MRT_I2C_MEM_WRITE(dev->mI2cHandle, dev->mAddr, addr, dev->mMemAddrSize , data, 1, dev->mTimeout );
