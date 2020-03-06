@@ -22,7 +22,7 @@ registers:
   - RIGHT_IN:       { addr: 0x01 , type: uint16_t, default: 0x097, perm: W, desc: Right line in control}
   - LEFT_OUT:       { addr: 0x02 , type: uint16_t, default: 0x079, perm: W, desc: Left Headphone Out control}
   - RIGHT_OUT:      { addr: 0x03 , type: uint16_t, default: 0x079, perm: W, desc: Right Headphone Out control}
-  - AN_PATH:        { addr: 0x04 , type: uint16_t, default: 0x00A, perm: W, desc: Analogue audio path control}
+  - AN_PATH:        { addr: 0x04 , type: uint16_t, default: 0x00A, perm: W, desc: analog audio path control}
   - DIG_PATH:       { addr: 0x05 , type: uint16_t, default: 0x008, perm: W, desc: Digital audio path control}
   - POWER_DWN:      { addr: 0x06 , type: uint16_t, default: 0x09F, perm: W, desc: Power Down control}
   - DIG_IFACE:      { addr: 0x07 , type: uint16_t, default: 0x09F, perm: W, desc: Digital audio interface format}
@@ -155,8 +155,74 @@ configs:
         - ACTIVE:     {Enable: ON}
         
 
+###########################################################################################################
+#                                   HW  (experimental)                                                    #
+###########################################################################################################
+
+package: QFN-28
+pins:
+  - XTI/MCLK: {pad: 1,  type: digital , dir: i, desc: Crystal Input or Master Clock Input (MCLK)}
+  - XTO:      {pad: 2,  type: digital , dir: o, desc: Crystal Output}
+  - DCVDD:    {pad: 3,  type: Supply, desc: Digital Core VDD}
+  - DGND:     {pad: 4,  type: Ground, desc: Digital GND }
+  - DBVDD:    {pad: 5,  type: Supply, desc: Digital Buffers VDD}
+  - CLKOUT:   {pad: 6,  type: digital , dir: o, desc: Buffered Clock Output}
+  - BCLK:     {pad: 7,  type: digital , dir: io, desc: Digital Audio Bit Clock, Pull Down, (see Note 1)}
+  - DACDAT:   {pad: 8,  type: digital , dir: i, desc: DAC Digital Audio Data Input}
+  - DACLRC:   {pad: 9,  type: digital , dir: io, desc: DAC Sample Rate Left/Right Clock, Pull Down (see Note 1)}
+  - ADCDAT:   {pad: 10, type: digital , dir: o, desc: ADC Digital Audio Data Output}
+  - ADCLRC:   {pad: 11, type: digital , dir: io, desc: ADC Sample Rate Left/Right Clock, Pull Down (see Note 1)}
+  - HPVDD:    {pad: 12, type: Supply, desc: Headphone VDD}
+  - LHPOUT:   {pad: 13, type: analog , dir: o, desc: Left Channel Headphone Output}
+  - RHPOUT:   {pad: 14, type: analog , dir: o, desc: Right Channel Headphone Output}
+  - HPGND:    {pad: 15, type: Ground, desc: Headphone GND}
+  - LOUT:     {pad: 16, type: analog , dir: o, desc: Left Channel Line Output}
+  - ROUT:     {pad: 17, type: analog , dir: o, desc: Right Channel Line Output}
+  - AVDD:     {pad: 18, type: Supply, desc: analog VDD}
+  - AGND:     {pad: 19, type: Ground, desc: analog GND}
+  - VMID:     {pad: 20, type: analog , dir: o, desc: Mid-rail reference decoupling point}
+  - MICBIAS:  {pad: 21, type: analog , dir: o, desc: Electret Microphone Bias}
+  - MICIN:    {pad: 22, type: analog , dir: i, desc: Microphone Input (AC coupled)}
+  - RLINEIN:  {pad: 23, type: analog , dir: i, desc: Right Channel Line Input (AC coupled)}
+  - LLINEIN:  {pad: 24, type: analog , dir: i, desc: Left Channel Line Input (AC coupled)}
+  - MODE:     {pad: 25, type: digital , dir: i, desc: Control Interface Selection, Pull Up (see Note 1)}
+  - CSB:      {pad: 26, type: digital , dir: i, desc: 3-Wire MPU Chip Select/ 2-Wire MPU interface addressselection, active low, Pull up (see Note 1)}
+  - SDIN:     {pad: 27, type: digital , dir: io, desc: 3-Wire MPU Data Input / 2-Wire MPU Data Input}
+  - SCLK:     {pad: 28, type: digital , dir: i, desc: 3-Wire MPU Clock Input / 2-Wire MPU Clock Input}
 
 
+variants:
+  - SSOP28:
+      package: SSOP-28
+      pins:
+        - 1: DBVDD 
+        - 2: CLKOUT 
+        - 3: BCLK 
+        - 4: DACDAT 
+        - 5: DACLRC 
+        - 6: ADCDAT 
+        - 7: ADCLRC 
+        - 8: HPVDD 
+        - 9: LHPOUT 
+        - 10: RHPOUT 
+        - 11: HPGND 
+        - 12: LOUT 
+        - 13: ROUT 
+        - 14: AVDD 
+        - 15: AGND 
+        - 16: VMID 
+        - 17: MICBIAS 
+        - 18: MICIN 
+        - 19: RLINEIN 
+        - 20: LLINEIN 
+        - 21: MODE 
+        - 22: CSB 
+        - 23: SDIN 
+        - 24: SCLK 
+        - 25: XTI/MCLK 
+        - 26: XTO 
+        - 27: DCVDD 
+        - 28: DGND 
 
 
 

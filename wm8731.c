@@ -59,13 +59,14 @@ mrt_status_t wm_init_i2c(wm8731_t* dev, mrt_i2c_handle_t i2c)
 
 mrt_status_t wm_test(wm8731_t* dev)
 {
+    mrt_status_t status = MRT_STATUS_ERROR;
     /*user-block-test-start*/
 
     /* No default test because device is write-only */
     return MRT_STATUS_ERROR;    //Return error so nobody relies on this test
 
     /*user-block-test-end*/
-    return MRT_STATUS_ERROR;
+    return status;
 }
 
 
