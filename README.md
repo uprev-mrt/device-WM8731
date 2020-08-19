@@ -2,7 +2,7 @@
 <h1>wm8731 Device</h1>
 <ul>
   <li> Generated with <a href="https://github.com/uprev-mrt/mrtutils/wiki/mrt-device">MrT Device Utility</a> </li>
-  <li> Bus:  I2C</li>
+  <li> Bus:  I2C, SPI</li>
   <li> RegMap: <a href="Regmap.html">Register Map</a>
   <li>Datasheet: <a href="https://statics.cirrus.com/pubs/proDatasheet/WM8731_v4.9.pdf">https://statics.cirrus.c...</a> </li>
   <li> DigiKey: <a href="https://www.digikey.com/products/en?KeyWords=WM8731CSEFL-ND">WM8731CSEFL-ND</a></li>
@@ -38,7 +38,7 @@
     <tr>
         <td><a href="#register_left_in_detail">LEFT_IN</a></td>
         <td>0x00</td>
-        <td>uint16_t</td>
+        <td>uint16</td>
         <td>W</td>
         <td>0x0097</td>
         <td>Left line in control</td>
@@ -46,7 +46,7 @@
     <tr>
         <td><a href="#register_right_in_detail">RIGHT_IN</a></td>
         <td>0x01</td>
-        <td>uint16_t</td>
+        <td>uint16</td>
         <td>W</td>
         <td>0x0097</td>
         <td>Right line in control</td>
@@ -54,7 +54,7 @@
     <tr>
         <td><a href="#register_left_out_detail">LEFT_OUT</a></td>
         <td>0x02</td>
-        <td>uint16_t</td>
+        <td>uint16</td>
         <td>W</td>
         <td>0x0079</td>
         <td>Left Headphone Out control</td>
@@ -62,7 +62,7 @@
     <tr>
         <td><a href="#register_right_out_detail">RIGHT_OUT</a></td>
         <td>0x03</td>
-        <td>uint16_t</td>
+        <td>uint16</td>
         <td>W</td>
         <td>0x0079</td>
         <td>Right Headphone Out control</td>
@@ -70,15 +70,15 @@
     <tr>
         <td><a href="#register_an_path_detail">AN_PATH</a></td>
         <td>0x04</td>
-        <td>uint16_t</td>
+        <td>uint16</td>
         <td>W</td>
         <td>0x000A</td>
-        <td>Analogue audio path control</td>
+        <td>analog audio path control</td>
     </tr>
     <tr>
         <td><a href="#register_dig_path_detail">DIG_PATH</a></td>
         <td>0x05</td>
-        <td>uint16_t</td>
+        <td>uint16</td>
         <td>W</td>
         <td>0x0008</td>
         <td>Digital audio path control</td>
@@ -86,7 +86,7 @@
     <tr>
         <td><a href="#register_power_dwn_detail">POWER_DWN</a></td>
         <td>0x06</td>
-        <td>uint16_t</td>
+        <td>uint16</td>
         <td>W</td>
         <td>0x009F</td>
         <td>Power Down control</td>
@@ -94,7 +94,7 @@
     <tr>
         <td><a href="#register_dig_iface_detail">DIG_IFACE</a></td>
         <td>0x07</td>
-        <td>uint16_t</td>
+        <td>uint16</td>
         <td>W</td>
         <td>0x009F</td>
         <td>Digital audio interface format</td>
@@ -102,7 +102,7 @@
     <tr>
         <td><a href="#register_sample_detail">SAMPLE</a></td>
         <td>0x08</td>
-        <td>uint16_t</td>
+        <td>uint16</td>
         <td>W</td>
         <td>0x0000</td>
         <td>Sampling control</td>
@@ -110,7 +110,7 @@
     <tr>
         <td><a href="#register_active_detail">ACTIVE</a></td>
         <td>0x09</td>
-        <td>uint16_t</td>
+        <td>uint16</td>
         <td>W</td>
         <td>0x0000</td>
         <td>Active Control</td>
@@ -118,7 +118,7 @@
     <tr>
         <td><a href="#register_reset_detail">RESET</a></td>
         <td>0x0F</td>
-        <td>uint16_t</td>
+        <td>uint16</td>
         <td>W</td>
         <td>0x0FFF</td>
         <td>Reset control</td>
@@ -321,7 +321,7 @@
   </tr>
   <tr>
     <th class="smallCell">Field</th>
-   <td class="empty" colspan="16"></td>
+   <td class="field" colspan="16">LEFT_OUT</td>
 
   </tr>
   <tr>
@@ -345,6 +345,10 @@
    </tr>
 </table>
 
+
+<h2> Fields:</h2>
+
+<b>LEFT_OUT:</b> Left Headphone Out control
 
 
 <div id="register_right_out_detail" class="packet">
@@ -380,7 +384,7 @@
   </tr>
   <tr>
     <th class="smallCell">Field</th>
-   <td class="empty" colspan="16"></td>
+   <td class="field" colspan="16">RIGHT_OUT</td>
 
   </tr>
   <tr>
@@ -405,6 +409,10 @@
 </table>
 
 
+<h2> Fields:</h2>
+
+<b>RIGHT_OUT:</b> Right Headphone Out control
+
 
 <div id="register_an_path_detail" class="packet">
 <h2>AN_PATH </h2>
@@ -414,7 +422,7 @@
     <li class="note">  Default: <b>[0x000A]</b></li>
 </ul>
 
-<p>Analogue audio path control</p>
+<p>analog audio path control</p>
 <!--*user-block-an_path-start*-->
 <!--*user-block-an_path-end*-->
 <table class="fields" width="80%">
@@ -768,7 +776,7 @@
   </tr>
   <tr>
     <th class="smallCell">Field</th>
-   <td class="empty" colspan="16"></td>
+   <td class="field" colspan="16">SAMPLE</td>
 
   </tr>
   <tr>
@@ -792,6 +800,10 @@
    </tr>
 </table>
 
+
+<h2> Fields:</h2>
+
+<b>SAMPLE:</b> Sampling control
 
 
 <div id="register_active_detail" class="packet">

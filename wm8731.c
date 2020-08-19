@@ -33,9 +33,6 @@ static mrt_status_t wm_init(wm8731_t* dev)
 
     /*user-block-init-start*/
 
-    /* Assign the custom write function to the RegDev because device does not us standard I2C register access */
-    dev->mRegDev.fWrite = wm8731_write_i2c;
-
     /*user-block-init-end*/
 
     return MRT_STATUS_OK;
@@ -52,8 +49,29 @@ mrt_status_t wm_init_i2c(wm8731_t* dev, mrt_i2c_handle_t i2c)
 
 
     /*user-block-init-i2c-start*/
+
+    /* Assign the custom write function to the RegDev because device does not us standard I2C register access */
+    dev->mRegDev.fWrite = wm8731_write_i2c;
+
     /*user-block-init-i2c-end*/
     
+    return status;
+}
+mrt_status_t wm_init_spi(wm8731_t* dev, mrt_spi_handle_t spi, mrt_gpio_t chipSelect)
+{
+    mrt_status_t status;
+
+    status = init_spi_register_device(&dev->mRegDev, spi, chipSelect, WM8731_REG_ADDR_SIZE );
+
+    wm_init(dev);
+
+    /*user-block-spi-start*/
+
+    /* Assign the custom write function to the RegDev because device does not us standard I2C register access */
+    dev->mRegDev.fWrite = wm8731_write_spi;
+
+    /*user-block-spi-end*/
+
     return status;
 }
 
@@ -92,6 +110,17 @@ mrt_status_t wm8731_write_i2c(mrt_regdev_t* dev, uint32_t addr, uint8_t* data,in
     /* Once we have shifted the 9th data bit into the address, we can write the remainder as a single byte*/
     return MRT_I2C_MEM_WRITE(dev->mI2cHandle, dev->mAddr, addr, dev->mMemAddrSize , data, 1, dev->mTimeout );
 
+}
+
+mrt_status_t wm8731_write_spi(mrt_regdev_t* dev, uint32_t addr, uint8_t* data,int len)
+{
+    /* wm8731 treats registers as 9 bits of data with a 7bit address. so we shift the LSB of the second byte into the address.. */
+    uint8_t packedData[2];
+    packedData[0] = (addr << 1) | (data[1] & 0xFE);
+    packedData[1] = data[0];
+    
+    /* Once we have shifted the 9th data bit into the address, we can write the remainder as a single byte*/
+    return MRT_SPI_TRANSMIT(dev->mSpiHandle, packedData, 2, 1000);
 }
 
 

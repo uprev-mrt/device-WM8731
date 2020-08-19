@@ -31,7 +31,7 @@ typedef struct{
     mrt_reg_t mRightIn;              //Right line in control
     mrt_reg_t mLeftOut;              //Left Headphone Out control
     mrt_reg_t mRightOut;             //Right Headphone Out control
-    mrt_reg_t mAnPath;               //Analogue audio path control
+    mrt_reg_t mAnPath;               //analog audio path control
     mrt_reg_t mDigPath;              //Digital audio path control
     mrt_reg_t mPowerDwn;             //Power Down control
     mrt_reg_t mDigIface;             //Digital audio interface format
@@ -48,6 +48,12 @@ typedef struct{
  * @param i2c handle for i2c bus
  */
 mrt_status_t wm_init_i2c(wm8731_t* dev, mrt_i2c_handle_t i2c);
+/**
+ * @brief initializes wm8731 device for i2c bus
+ * @param dev ptr to wm8731 device
+ * @param spi handle for i2c bus
+ */
+mrt_status_t wm_init_spi(wm8731_t* dev, mrt_spi_handle_t spi, mrt_gpio_t chipSelect );
 
 /**
   *@brief tests interface with device
@@ -95,6 +101,16 @@ void wm_set_volume(wm8731_t* dev, uint8_t left, uint8_t right);
  * @return MRT_STATUS_OK if the write is successful
  */
 mrt_status_t wm8731_write_i2c(mrt_regdev_t* dev, uint32_t addr, uint8_t* data,int len); 
+
+/**
+ * @brief custom register write function fo wm8731 device because it uses a weird adressing scheme
+ * @param dev ptr to regdev_t device
+ * @param addr address of register to write
+ * @param data ptr to data to write
+ * @param len len of data to write
+ * @return MRT_STATUS_OK if the write is successful
+ */
+mrt_status_t wm8731_write_spi(mrt_regdev_t* dev, uint32_t addr, uint8_t* data,int len); 
 
 /*user-block-bottom-end*/
 
