@@ -8,6 +8,7 @@
 
 #define WM8731_I2C_ADDRESS 0x34
 #define WM8731_REG_ADDR_SIZE 1
+#define WM8731_REG_COUNT 11
 
 
 /*******************************************************************************
