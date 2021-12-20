@@ -5,8 +5,8 @@ created: 01/30/2020
 category: Device
 description: Aduio codec
 datasheet: https://statics.cirrus.com/pubs/proDatasheet/WM8731_v4.9.pdf
-mfg: STMicroelectronics
-mfg_pn: WM8731CLSEFL
+mfr: STMicroelectronics
+mfr_pn: WM8731CLSEFL
 digikey_pn: WM8731CSEFL-ND
 
 prefix: wm
